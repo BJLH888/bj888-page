@@ -17,9 +17,11 @@
         .balance-box {background:#fef3c7; color:#d97706; padding:8px 16px; border-radius:20px; font-size:14px; white-space:nowrap;}
         .balance-box strong {font-size:16px;}
         .kefu-btn {background:var(--success); color:#fff; padding:8px 16px; border-radius:20px; font-size:14px; text-decoration:none; font-weight:600; border:none; cursor:pointer; white-space:nowrap;}
-        .register-bar {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; padding:14px 20px; text-align:center; margin-bottom:24px; border-radius:12px;}
-        .register-title {font-size:16px; font-weight:600; margin-bottom:8px;}
-        .register-link {background:#fff; color:#2563eb; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700; display:inline-block; margin-top:6px;}
+        .register-bar {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; padding:16px 24px; text-align:center; margin-bottom:24px; border-radius:12px;}
+        .register-title {font-size:18px; font-weight:600; margin-bottom:6px;}
+        .register-desc {font-size:14px; opacity:.9; margin-bottom:12px;}
+        .register-link {background:#fff; color:#2563eb; padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:700; display:inline-block; transition:all .2s;}
+        .register-link:hover {transform:scale(1.05);}
         .admin-panel {background:#fff; border-radius:12px; padding:20px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:none;}
         .admin-panel.show {display:block;}
         .admin-title {font-size:18px; font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;}
@@ -37,6 +39,7 @@
         .goods-img img {width:100%; height:100%; object-fit:cover;}
         .goods-img.locked img {filter:blur(6px);}
         .goods-img.locked::after {content:'🔒 已锁定'; position:absolute; inset:0; background:rgba(0,0,0,0.5); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:600;}
+        .goods-img-placeholder {font-size:48px; color:#94a3b8;}
         .goods-body {padding:18px;}
         .goods-name {font-size:17px; font-weight:600; margin-bottom:8px; line-height:1.4;}
         .goods-desc {font-size:13px; color:var(--gray); margin-bottom:14px; min-height:40px; line-height:1.5;}
@@ -65,7 +68,6 @@
         .page.active {display:block;}
         .search-bar {display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;}
         .search-input {flex:1; min-width:250px; padding:14px 20px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px;}
-        /* 客服悬浮 */
         .kefu-float {position:fixed; bottom:30px; right:30px; z-index:999;}
         .kefu-float-btn {width:60px; height:60px; background:var(--success); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; cursor:pointer; box-shadow:0 4px 15px rgba(7,193,96,.4); transition:all .3s;}
         .kefu-float-btn:hover {transform:scale(1.1);}
@@ -102,16 +104,20 @@
 </header>
 
 <main class="container">
-    <!-- 商品广场 -->
     <section id="home" class="page active">
         <!-- 专属注册入口 -->
         <div class="register-bar">
             <div class="register-title">🎁 专属通道 - 新用户注册享福利</div>
-            <div>仅限从本页面注册的用户享受专属福利</div>
-            <a href="这里替换成你的注册链接" target="_blank" class="register-link">👉 立即注册</a>
+            <div class="register-desc">仅限从本页面注册的用户享受专属福利</div>
+            <a href="v8166.vip" target="_blank" class="register-link">👉 立即注册</a>
         </div>
 
-        <!-- 管理员面板 - 只有你能看到 -->
+        <!-- 管理员入口 -->
+        <div style="text-align:center; margin-bottom:16px;">
+            <button class="btn btn-sm" style="background:#e5e7eb; color:#374151;" onclick="toggleAdminPanel()">🔐 管理员入口</button>
+        </div>
+
+        <!-- 管理员面板 -->
         <div class="admin-panel" id="admin-panel">
             <div class="admin-title">
                 🔐 管理员上架商品
@@ -127,9 +133,6 @@
                 <button class="form-btn btn-primary" onclick="adminAddGoods()">✅ 上架</button>
             </div>
         </div>
-        <div style="text-align:center; margin-bottom:16px;">
-            <button class="btn btn-sm" style="background:#e5e7eb; color:#374151;" onclick="toggleAdminPanel()">🔐 管理员入口</button>
-        </div>
         
         <div class="search-bar">
             <input type="text" class="search-input" id="search-input" placeholder="搜索商品名称...">
@@ -138,13 +141,11 @@
         <div class="goods-grid" id="goods-grid"></div>
     </section>
 
-    <!-- 我的订单 -->
     <section id="orders" class="page">
         <h2 style="margin-bottom:20px;">📋 我的订单</h2>
         <div id="order-list"><div class="empty">暂无订单，快去选购吧！</div></div>
     </section>
 
-    <!-- 资金钱包 -->
     <section id="wallet" class="page">
         <div class="wallet-card">
             <div style="font-size:18px;">账户余额</div>
@@ -175,18 +176,15 @@
 </div>
 
 <script>
-// ========== 管理员密码（改成你自己的）==========
-const ADMIN_PASSWORD = '123456'; // ← 改成你的密码
+// ========== 管理员密码 ==========
+const ADMIN_PASSWORD = '123456'; // 改成你的密码
 
-// ========== 专属注册链接（改成你的）==========
-const REGISTER_URL = '这里替换成你的注册链接';
-
-// ========== 商品库 - 只有管理员能修改 ==========
+// ========== 商品库 ==========
 let goodsList = [
     {
         id: 1,
         name: '雷速拉坦伊布拉莫维奇',
-        price: 18,
+        price: 199,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
         img: 'https://i.postimg.cc/tJWSmNyD/yi-bu.jpg',
         unlocked: false
@@ -194,7 +192,7 @@ let goodsList = [
     {
         id: 2,
         name: '雷速傻哥专业连红搬运',
-        price: 18,
+        price: 150,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
         img: 'https://i.postimg.cc/xdXP433G/sha-ge.jpg',
         unlocked: false
@@ -202,26 +200,17 @@ let goodsList = [
     {
         id: 3,
         name: '雷速弘扬奉献精神的阿火',
-        price: 18,
+        price: 85,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: 'https://i.postimg.cc/qMpxTTG7/a-huo.jpg', // ← 替换成阿火的链接
+        img: 'https://i.postimg.cc/qMpxTTG7/a-huo.jpg',
         unlocked: false
     }
-        {
-        id: 4,
-        name: '雷速上岸的十串神',
-        price: 150,
-        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: 'https://i.postimg.cc/BbjLqmtp/shi-chuan-shen.jpg',
-        unlocked: false
-    },
 ];
 
 let balance = 0.00;
 let orders = [];
 let isAdmin = false;
 
-// 保存/读取数据
 function saveData() {
     localStorage.setItem('v8_goods', JSON.stringify(goodsList));
     localStorage.setItem('v8_orders', JSON.stringify(orders));
@@ -240,7 +229,6 @@ function showKefu() {
     alert('微信：你的微信号\nQQ：你的QQ号\n充值/提现/解锁 请联系客服');
 }
 
-// 管理员入口验证
 function toggleAdminPanel() {
     if (isAdmin) {
         document.getElementById('admin-panel').classList.toggle('show');
@@ -250,7 +238,7 @@ function toggleAdminPanel() {
     if (pwd === ADMIN_PASSWORD) {
         isAdmin = true;
         document.getElementById('admin-panel').classList.add('show');
-        alert('✅ 管理员模式已开启\n只有你能看到上架/删除按钮');
+        alert('✅ 管理员模式已开启');
     } else if (pwd) {
         alert('❌ 密码错误');
     }
@@ -259,7 +247,6 @@ function toggleAdmin() {
     document.getElementById('admin-panel').classList.remove('show');
 }
 
-// 管理员上架商品
 function adminAddGoods() {
     if (!isAdmin) return alert('请先验证管理员密码');
     const name = document.getElementById('new-name').value.trim();
@@ -267,8 +254,8 @@ function adminAddGoods() {
     const desc = document.getElementById('new-desc').value.trim() || 'v8体育官方特供';
     const img = document.getElementById('new-img').value.trim();
     
-    if (!name || !price || price <= 0 || !img) {
-        return alert('请填写完整信息：名称、价格、图片链接');
+    if (!name || !price || price <= 0) {
+        return alert('请填写名称和价格');
     }
     
     const newId = goodsList.length ? Math.max(...goodsList.map(g => g.id)) + 1 : 1;
@@ -281,7 +268,6 @@ function adminAddGoods() {
         unlocked: false
     });
     
-    // 清空输入框
     document.getElementById('new-name').value = '';
     document.getElementById('new-price').value = '';
     document.getElementById('new-desc').value = '';
@@ -292,7 +278,6 @@ function adminAddGoods() {
     renderGoods();
 }
 
-// 管理员删除商品
 function adminDeleteGoods(id) {
     if (!isAdmin) return;
     if (!confirm('确定删除此商品？')) return;
@@ -327,7 +312,10 @@ function renderGoods(list = goodsList) {
                 </div>
             ` : ''}
             <div class="goods-img ${item.unlocked ? '' : 'locked'}">
-                <img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='📦'">
+                ${item.img 
+                    ? `<img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='<span class=\\'goods-img-placeholder\\'>📦</span>'">`
+                    : `<span class="goods-img-placeholder">📦</span>`
+                }
             </div>
             <div class="goods-body">
                 <div class="goods-name">${item.name}</div>
@@ -360,7 +348,7 @@ function renderOrders() {
                 金额：¥${item.price.toFixed(2)}<br>
                 时间：${item.time}
             </div>
-            <img src="${item.img}" class="order-img ${item.unlocked ? 'show' : ''}" alt="${item.name}">
+            ${item.img ? `<img src="${item.img}" class="order-img ${item.unlocked ? 'show' : ''}" alt="${item.name}">` : ''}
             ${!item.unlocked 
                 ? `<button class="btn btn-success btn-sm" style="margin-top:10px;" onclick="alert('请联系客服解锁')">🔓 联系客服解锁</button>` 
                 : ''
