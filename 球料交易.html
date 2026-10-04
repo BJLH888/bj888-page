@@ -14,14 +14,29 @@
         .nav {display:flex; gap:8px; flex-wrap:wrap;}
         .nav a {text-decoration:none; color:#4b5563; padding:10px 18px; border-radius:8px; font-size:15px; transition:all .2s;}
         .nav a:hover, .nav a.active {background:var(--primary); color:#fff;}
-        .balance-box {background:#fef3c7; color:#d97706; padding:8px 16px; border-radius:20px; font-size:14px; white-space:nowrap;}
-        .balance-box strong {font-size:16px;}
         .kefu-btn {background:var(--success); color:#fff; padding:8px 16px; border-radius:20px; font-size:14px; text-decoration:none; font-weight:600; border:none; cursor:pointer; white-space:nowrap;}
+        .login-area {display:flex; gap:10px; align-items:center;}
+        .user-info {font-size:14px; color:#374151;}
+        .logout-btn {background:#f3f4f6; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-left:8px;}
         .register-bar {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; padding:16px 24px; text-align:center; margin-bottom:24px; border-radius:12px;}
         .register-title {font-size:18px; font-weight:600; margin-bottom:6px;}
         .register-desc {font-size:14px; opacity:.9; margin-bottom:12px;}
         .register-link {background:#fff; color:#2563eb; padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:700; display:inline-block; transition:all .2s;}
         .register-link:hover {transform:scale(1.05);}
+        /* 登录弹窗 */
+        .login-modal {position:fixed; inset:0; background:rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center; z-index:9999;}
+        .login-modal.hidden {display:none;}
+        .login-box {background:#fff; border-radius:16px; padding:32px; max-width:420px; width:90%; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,.2);}
+        .login-title {font-size:22px; font-weight:700; margin-bottom:12px; color:#1f2937;}
+        .login-desc {color:#6b7280; margin-bottom:24px; line-height:1.6; font-size:14px;}
+        .login-input {width:100%; padding:14px 18px; border:2px solid #e5e7eb; border-radius:10px; font-size:16px; margin-bottom:12px;}
+        .login-input:focus {outline:none; border-color:var(--primary);}
+        .login-btn {width:100%; padding:14px; background:var(--primary); color:#fff; border:none; border-radius:10px; font-size:16px; font-weight:600; cursor:pointer; transition:all .2s; margin-top:8px;}
+        .login-btn:hover {background:#1d4ed8;}
+        .login-error {color:var(--danger); margin-top:12px; font-size:14px; display:none;}
+        .login-error.show {display:block;}
+        .login-tip {margin-top:16px; font-size:13px; color:#6b7280;}
+        .login-tip a {color:var(--primary); text-decoration:none;}
         .admin-panel {background:#fff; border-radius:12px; padding:20px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:none;}
         .admin-panel.show {display:block;}
         .admin-title {font-size:18px; font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;}
@@ -31,15 +46,12 @@
         .form-btn {padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
         .btn-primary {background:var(--primary); color:#fff;}
         .btn-success {background:var(--success); color:#fff;}
-        .btn-danger {background:var(--danger); color:#fff;}
-        .goods-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:24px;}
+        .goods-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:24px; opacity:0.2; pointer-events:none; transition:all .5s;}
+        .goods-grid.unlocked {opacity:1; pointer-events:auto;}
         .goods-card {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .3s; position:relative;}
         .goods-card:hover {transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1);}
         .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;}
         .goods-img img {width:100%; height:100%; object-fit:cover;}
-        .goods-img.locked img {filter:blur(6px);}
-        .goods-img.locked::after {content:'🔒 已锁定'; position:absolute; inset:0; background:rgba(0,0,0,0.5); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:600;}
-        .goods-img-placeholder {font-size:48px; color:#94a3b8;}
         .goods-body {padding:18px;}
         .goods-name {font-size:17px; font-weight:600; margin-bottom:8px; line-height:1.4;}
         .goods-desc {font-size:13px; color:var(--gray); margin-bottom:14px; min-height:40px; line-height:1.5;}
@@ -51,21 +63,6 @@
         .btn-sm {padding:6px 12px; font-size:13px;}
         .btn-block {width:100%;}
         .empty {text-align:center; padding:60px 20px; color:#9ca3af;}
-        .order-item {background:#fff; border-radius:12px; padding:20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);}
-        .order-header {display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
-        .order-name {font-weight:600; font-size:16px;}
-        .order-status {padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600;}
-        .status-pending {background:#fef3c7; color:#d97706;}
-        .status-paid {background:#d1fae5; color:#059661;}
-        .order-img {width:120px; border-radius:8px; margin:10px 0; display:none;}
-        .order-img.show {display:block;}
-        .order-info {font-size:13px; color:#6b7280; margin-top:8px;}
-        .wallet-card {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; border-radius:16px; padding:40px; text-align:center; max-width:500px; margin:0 auto;}
-        .wallet-amount {font-size:48px; font-weight:700; margin:15px 0;}
-        .wallet-btns {display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; justify-content:center;}
-        .wallet-btns .btn {background:rgba(255,255,255,.2); color:#fff;}
-        .page {display:none;}
-        .page.active {display:block;}
         .search-bar {display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;}
         .search-input {flex:1; min-width:250px; padding:14px 20px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px;}
         .kefu-float {position:fixed; bottom:30px; right:30px; z-index:999;}
@@ -88,16 +85,28 @@
 </head>
 <body>
 
+<!-- 登录弹窗 -->
+<div class="login-modal" id="loginModal">
+    <div class="login-box">
+        <div class="login-title">🔐 账号登录</div>
+        <div class="login-desc">请使用从专属链接注册的账号登录<br>未注册请先点击下方注册</div>
+        <input type="text" class="login-input" id="username" placeholder="输入账号" autocomplete="off">
+        <input type="password" class="login-input" id="password" placeholder="输入密码" autocomplete="off">
+        <button class="login-btn" onclick="checkLogin()">立即登录</button>
+        <div class="login-error" id="loginError">❌ 账号或密码错误<br>请从专属链接注册后再登录</div>
+        <div class="login-tip">还没有账号？<a href="https://v8166.vip" target="_blank">👉 立即注册</a></div>
+    </div>
+</div>
+
 <header class="header">
     <div class="header-inner">
         <div class="logo">📘 V8体育特供</div>
         <nav class="nav">
             <a href="#" class="active" data-page="home">商品广场</a>
-            <a href="#" data-page="orders">我的订单</a>
-            <a href="#" data-page="wallet">资金钱包</a>
         </nav>
-        <div style="display:flex; gap:10px; align-items:center;">
-            <div class="balance-box">余额：<strong id="balance">0.00</strong> 元</div>
+        <div class="login-area" id="loginArea">
+            <span class="user-info" id="userDisplay" style="display:none;">👤 <span id="currentUser"></span></span>
+            <button class="logout-btn" id="logoutBtn" style="display:none;" onclick="logout()">退出</button>
             <button class="kefu-btn" onclick="showKefu()">💬 客服</button>
         </div>
     </div>
@@ -129,7 +138,7 @@
             </div>
             <div class="form-row">
                 <input type="text" class="form-input" id="new-desc" placeholder="商品描述">
-                <input type="text" class="form-input" id="new-img" placeholder="图片直链（Postimg直接链接）">
+                <input type="text" class="form-input" id="new-img" placeholder="图片直链">
                 <button class="form-btn btn-primary" onclick="adminAddGoods()">✅ 上架</button>
             </div>
         </div>
@@ -139,24 +148,6 @@
             <button class="btn btn-primary" id="search-btn">搜索</button>
         </div>
         <div class="goods-grid" id="goods-grid"></div>
-    </section>
-
-    <section id="orders" class="page">
-        <h2 style="margin-bottom:20px;">📋 我的订单</h2>
-        <div id="order-list"><div class="empty">暂无订单，快去选购吧！</div></div>
-    </section>
-
-    <section id="wallet" class="page">
-        <div class="wallet-card">
-            <div style="font-size:18px;">账户余额</div>
-            <div class="wallet-amount">¥ <span id="w-balance">0.00</span></div>
-            <div style="opacity:.8; font-size:14px; margin-bottom:10px;">安全 · 正规 · 可提现</div>
-            <div style="font-size:13px; opacity:.7; margin-bottom:20px;">充值/提现 请联系客服</div>
-            <div class="wallet-btns">
-                <button class="btn" id="recharge-btn">💰 充值</button>
-                <button class="btn" id="withdraw-btn">💳 提现</button>
-            </div>
-        </div>
     </section>
 </main>
 
@@ -170,16 +161,24 @@
             <div class="kefu-float-name">V8官方客服</div>
             <div class="kefu-float-desc">工作时间：09:00-24:00<br>竭诚为您服务</div>
             <button class="kefu-float-link" onclick="alert('请添加微信：\nAA9767A')">💚 微信联系</button>
-            <button class="kefu-float-link qq" onclick="alert('请添加QQ群：\n142749228')">🐧 QQ联系</button>
+            <button class="kefu-float-link qq" onclick="alert('请添加QQ：\n142749228')">🐧 QQ联系</button>
         </div>
     </div>
 </div>
 
 <script>
-// ========== 管理员密码 ==========
-const ADMIN_PASSWORD = '123456'; // 改成你的密码
+// ========== 配置区 ==========
+const ADMIN_PASSWORD = '123456';        // 管理员密码
+const REGISTER_URL = 'https://v8166.vip'; // 注册链接
 
-// ========== 商品库 ==========
+// ✅ 已注册的有效账号列表（添加在这里）
+const VALID_USERS = {
+    // '账号名': '密码',
+    'admin': '123456',
+    // 继续添加：'张三': '123456',
+};
+
+// 商品库
 let goodsList = [
     {
         id: 1,
@@ -187,7 +186,6 @@ let goodsList = [
         price: 199,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
         img: 'https://i.postimg.cc/tJWSmNyD/yi-bu.jpg',
-        unlocked: false
     },
     {
         id: 2,
@@ -195,38 +193,72 @@ let goodsList = [
         price: 150,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
         img: 'https://i.postimg.cc/xdXP433G/sha-ge.jpg',
-        unlocked: false
     },
     {
         id: 3,
         name: '雷速弘扬奉献精神的阿火',
         price: 85,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: 'https://i.postimg.cc/qMpxTTG7/a-huo.jpg',
-        unlocked: false
+        img: '', // 填阿火的链接
     }
 ];
 
-let balance = 0.00;
-let orders = [];
 let isAdmin = false;
+let currentUser = null;
 
-function saveData() {
-    localStorage.setItem('v8_goods', JSON.stringify(goodsList));
-    localStorage.setItem('v8_orders', JSON.stringify(orders));
-    localStorage.setItem('v8_balance', balance.toString());
+// 检查是否已登录
+function checkLoggedIn() {
+    const saved = localStorage.getItem('v8_user');
+    if (saved) {
+        const userData = JSON.parse(saved);
+        if (VALID_USERS[userData.username] === userData.password) {
+            currentUser = userData.username;
+            showLoggedIn();
+            return true;
+        }
+    }
+    return false;
 }
-function loadData() {
-    const g = localStorage.getItem('v8_goods');
-    const o = localStorage.getItem('v8_orders');
-    const b = localStorage.getItem('v8_balance');
-    if (g) goodsList = JSON.parse(g);
-    if (o) orders = JSON.parse(o);
-    if (b) balance = parseFloat(b);
+
+// 登录验证
+function checkLogin() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    
+    if (VALID_USERS[username] && VALID_USERS[username] === password) {
+        currentUser = username;
+        localStorage.setItem('v8_user', JSON.stringify({username, password}));
+        showLoggedIn();
+    } else {
+        document.getElementById('loginError').classList.add('show');
+    }
+}
+
+// 显示已登录状态
+function showLoggedIn() {
+    document.getElementById('loginModal').classList.add('hidden');
+    document.getElementById('goods-grid').classList.add('unlocked');
+    document.getElementById('currentUser').textContent = currentUser;
+    document.getElementById('userDisplay').style.display = 'inline';
+    document.getElementById('logoutBtn').style.display = 'inline';
+    renderGoods();
+}
+
+// 退出登录
+function logout() {
+    localStorage.removeItem('v8_user');
+    currentUser = null;
+    document.getElementById('goods-grid').classList.remove('unlocked');
+    document.getElementById('userDisplay').style.display = 'none';
+    document.getElementById('logoutBtn').style.display = 'none';
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('loginError').classList.remove('show');
+    document.getElementById('loginModal').classList.remove('hidden');
 }
 
 function showKefu() {
-    alert('微信：AA9767A\nQQ群：142749228\n充值/提现/解锁 请联系客服');
+    alert('微信：AA9767A\nQQ群：142749228\n注册/登录 请联系客服');
 }
 
 function toggleAdminPanel() {
@@ -259,21 +291,13 @@ function adminAddGoods() {
     }
     
     const newId = goodsList.length ? Math.max(...goodsList.map(g => g.id)) + 1 : 1;
-    goodsList.push({
-        id: newId,
-        name,
-        price,
-        desc,
-        img,
-        unlocked: false
-    });
+    goodsList.push({id: newId, name, price, desc, img});
     
     document.getElementById('new-name').value = '';
     document.getElementById('new-price').value = '';
     document.getElementById('new-desc').value = '';
     document.getElementById('new-img').value = '';
     
-    saveData();
     alert('✅ 商品上架成功！');
     renderGoods();
 }
@@ -282,20 +306,7 @@ function adminDeleteGoods(id) {
     if (!isAdmin) return;
     if (!confirm('确定删除此商品？')) return;
     goodsList = goodsList.filter(g => g.id !== id);
-    saveData();
     renderGoods();
-}
-
-function switchPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-    document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
-    document.getElementById(pageId).classList.add('active');
-    if (pageId === 'home') renderGoods();
-    if (pageId === 'orders') renderOrders();
-    if (pageId === 'wallet') {
-        document.getElementById('w-balance').textContent = balance.toFixed(2);
-    }
 }
 
 function renderGoods(list = goodsList) {
@@ -311,79 +322,20 @@ function renderGoods(list = goodsList) {
                     <button class="goods-admin-btn" onclick="adminDeleteGoods(${item.id})">删除</button>
                 </div>
             ` : ''}
-            <div class="goods-img ${item.unlocked ? '' : 'locked'}">
+            <div class="goods-img">
                 ${item.img 
-                    ? `<img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='<span class=\\'goods-img-placeholder\\'>📦</span>'">`
-                    : `<span class="goods-img-placeholder">📦</span>`
+                    ? `<img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='📦'">`
+                    : '📦'
                 }
             </div>
             <div class="goods-body">
                 <div class="goods-name">${item.name}</div>
                 <div class="goods-desc">${item.desc}</div>
                 <div class="goods-price">¥${item.price.toFixed(2)}</div>
-                ${item.unlocked 
-                    ? '<button class="btn btn-success btn-sm btn-block" disabled>✅ 已解锁</button>' 
-                    : `<button class="btn btn-primary btn-sm btn-block" onclick="buyItem(${item.id})">立即购买</button>`
-                }
+                <button class="btn btn-success btn-sm btn-block" disabled>✅ 查看详情</button>
             </div>
         </div>
     `).join('');
-}
-
-function renderOrders() {
-    const list = document.getElementById('order-list');
-    if (!orders.length) {
-        list.innerHTML = `<div class="empty">暂无订单记录</div>`;
-        return;
-    }
-    list.innerHTML = orders.map(item => `
-        <div class="order-item">
-            <div class="order-header">
-                <div class="order-name">${item.name}</div>
-                <div class="order-status ${item.unlocked ? 'status-paid' : 'status-pending'}">
-                    ${item.unlocked ? '✅ 已解锁' : '⏳ 待解锁'}
-                </div>
-            </div>
-            <div class="order-info">
-                金额：¥${item.price.toFixed(2)}<br>
-                时间：${item.time}
-            </div>
-            ${item.img ? `<img src="${item.img}" class="order-img ${item.unlocked ? 'show' : ''}" alt="${item.name}">` : ''}
-            ${!item.unlocked 
-                ? `<button class="btn btn-success btn-sm" style="margin-top:10px;" onclick="alert('请联系客服解锁')">🔓 联系客服解锁</button>` 
-                : ''
-            }
-        </div>
-    `).join('');
-}
-
-function buyItem(id) {
-    const item = goodsList.find(g => g.id === id);
-    if (!item || item.unlocked) return;
-    
-    if (balance < item.price) {
-        alert(`余额不足！\n需要：¥${item.price}\n当前：¥${balance.toFixed(2)}\n请先充值或联系客服`);
-        return;
-    }
-    
-    if (!confirm(`确认购买【${item.name}】？\n价格：¥${item.price}\n余额：¥${balance.toFixed(2)}`)) return;
-    
-    balance -= item.price;
-    item.unlocked = true;
-    
-    orders.unshift({
-        goodsId: item.id,
-        name: item.name,
-        price: item.price,
-        img: item.img,
-        unlocked: true,
-        time: new Date().toLocaleString('zh-CN')
-    });
-    
-    saveData();
-    document.getElementById('balance').textContent = balance.toFixed(2);
-    alert(`购买成功！✅\n商品已自动解锁\n请到「我的订单」查看`);
-    renderGoods();
 }
 
 function searchGoods() {
@@ -393,38 +345,15 @@ function searchGoods() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    loadData();
+    if (!checkLoggedIn()) {
+        document.getElementById('loginModal').classList.remove('hidden');
+    }
     
-    document.querySelectorAll('.nav a').forEach(a => {
-        a.addEventListener('click', e => {
-            e.preventDefault();
-            switchPage(a.getAttribute('data-page'));
-        });
+    document.getElementById('password').addEventListener('keydown', e => {
+        if (e.key === 'Enter') checkLogin();
     });
-    
-    renderGoods();
-    document.getElementById('balance').textContent = balance.toFixed(2);
-    
     document.getElementById('search-btn').addEventListener('click', searchGoods);
     document.getElementById('search-input').addEventListener('keydown', e => e.key === 'Enter' && searchGoods());
-    
-    document.getElementById('recharge-btn').addEventListener('click', () => {
-        const num = parseFloat(prompt('请输入充值金额：'));
-        if (!num || num <= 0) return alert('金额错误！');
-        balance += num;
-        saveData();
-        document.getElementById('balance').textContent = balance.toFixed(2);
-        alert(`充值成功！🎉\n当前余额：¥${balance.toFixed(2)}`);
-    });
-    
-    document.getElementById('withdraw-btn').addEventListener('click', () => {
-        const num = parseFloat(prompt('请输入提现金额：'));
-        if (!num || num <= 0 || num > balance) return alert('金额错误或余额不足！');
-        balance -= num;
-        saveData();
-        document.getElementById('balance').textContent = balance.toFixed(2);
-        alert(`提现申请提交！✅\n请联系客服处理\n当前余额：¥${balance.toFixed(2)}`);
-    });
 });
 </script>
 
