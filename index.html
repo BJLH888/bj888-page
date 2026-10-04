@@ -17,6 +17,17 @@
             padding: 20px;
         }
 
+        /* 手机适配 */
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .top-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .action-buttons { width: 100%; justify-content: space-between; }
+            .action-btn { padding: 10px 8px; font-size: 14px; }
+            .grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+            .payment-grid { grid-template-columns: repeat(3, 1fr) !important; }
+            .withdraw-tabs { overflow-x: auto; width: 100%; }
+        }
+
         /* 顶部账户栏 */
         .top-bar {
             background: #fff;
@@ -42,11 +53,7 @@
             margin-left: 5px;
         }
 
-        .view-switch {
-            display: flex;
-            gap: 8px;
-        }
-
+        .view-switch { display: flex; gap: 8px; }
         .view-btn {
             padding: 8px 25px;
             border: none;
@@ -54,22 +61,11 @@
             cursor: pointer;
             font-size: 14px;
         }
+        .view-btn.pc { background: #2563eb; color: white; }
+        .view-btn.h5 { background: #e5e7eb; color: #333; }
+        .view-btn.h5.active { background: #2563eb; color: white; }
 
-        .view-btn.pc {
-            background: #2563eb;
-            color: white;
-        }
-
-        .view-btn.h5 {
-            background: #e5e7eb;
-            color: #333;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
+        .action-buttons { display: flex; gap: 10px; }
         .action-btn {
             padding: 10px 25px;
             border: none;
@@ -77,14 +73,12 @@
             color: white;
             font-size: 15px;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
         }
-
         .deposit { background: #2563eb; }
         .withdraw { background: #16a34a; }
         .refresh { background: #f97316; }
+        .add { background: #8b5cf6; }
+        .sub { background: #ec4899; }
 
         /* 模块网格 */
         .grid-container {
@@ -92,7 +86,6 @@
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
         }
-
         .grid-card {
             background: #fff;
             border-radius: 12px;
@@ -101,26 +94,10 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: transform 0.2s;
         }
-
-        .grid-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .card-icon {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .card-value {
-            font-size: 14px;
-            color: #888;
-        }
+        .grid-card:hover { transform: translateY(-3px); }
+        .card-icon { font-size: 45px; margin-bottom: 15px; }
+        .card-title { font-size: 16px; color: #333; margin-bottom: 8px; }
+        .card-value { font-size: 14px; color: #888; }
 
         /* 背景色区分 */
         .bg-1 { background: #fff7ed; }
@@ -133,14 +110,8 @@
         .bg-8 { background: #fffbeb; }
 
         /* 页面切换 */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
+        .page { display: none; }
+        .page.active { display: block; }
         .back-btn {
             background: #e5e7eb;
             border: none;
@@ -150,19 +121,47 @@
             font-size: 15px;
             margin-bottom: 25px;
         }
+        .page-title { font-size: 20px; margin-bottom: 25px; color: #333; }
 
-        .page-title {
-            font-size: 20px;
+        /* 表单样式 */
+        .form-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin-bottom: 25px;
-            color: #333;
+            max-width: 500px;
         }
+        .form-label {
+            display: block;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .form-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .confirm { background: #2563eb; }
 
         .payment-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 15px;
+            margin-bottom: 30px;
         }
-
         .payment-item {
             border: 1px solid #e5e7eb;
             border-radius: 8px;
@@ -171,12 +170,10 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
         .payment-item:hover, .payment-item.active {
             border-color: #2563eb;
             background: #eff6ff;
         }
-
         .payment-tag {
             background: #ef4444;
             color: white;
@@ -187,13 +184,38 @@
             margin-bottom: 8px;
         }
 
+        /* 二维码显示区域 */
+        .qrcode-box {
+            display: none;
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        .qrcode-box.show { display: block; }
+        .qrcode-img {
+            width: 200px;
+            height: 200px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            overflow: hidden;
+        }
+        .qrcode-img img { width: 100%; height: 100%; object-fit: contain; }
+        .qrcode-name { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 10px; }
+        .qrcode-tip { font-size: 14px; color: #666; }
+
         .withdraw-tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 25px;
             flex-wrap: wrap;
         }
-
         .withdraw-tab {
             padding: 10px 20px;
             border: 1px solid #d1d5db;
@@ -202,7 +224,6 @@
             cursor: pointer;
             font-size: 14px;
         }
-
         .withdraw-tab.active {
             border-color: #2563eb;
             background: #eff6ff;
@@ -215,17 +236,19 @@
     <div id="main-page" class="page active">
         <div class="top-bar">
             <div class="balance-item">
-                账户总额：<span>0.00</span>
-                &nbsp;&nbsp;现金额度：<span>0.00</span>
-                &nbsp;&nbsp;钱包额度：<span>0.00</span>
+                账户总额：<span id="total-balance">0.00</span>
+                &nbsp;&nbsp;现金额度：<span id="cash-balance">100000.00</span>
+                &nbsp;&nbsp;钱包额度：<span id="wallet-balance">0.00</span>
             </div>
             <div class="view-switch">
-                <button class="view-btn pc">PC</button>
-                <button class="view-btn h5">H5</button>
+                <button class="view-btn pc active" id="btn-pc">PC</button>
+                <button class="view-btn h5" id="btn-h5">H5</button>
             </div>
             <div class="action-buttons">
                 <button class="action-btn deposit" id="btn-deposit">存款</button>
                 <button class="action-btn withdraw" id="btn-withdraw">取款</button>
+                <button class="action-btn add" id="btn-add">上分</button>
+                <button class="action-btn sub" id="btn-sub">下分</button>
                 <button class="action-btn refresh" id="btn-refresh">刷新</button>
             </div>
         </div>
@@ -234,7 +257,7 @@
             <div class="grid-card bg-1">
                 <div class="card-icon">💰</div>
                 <div class="card-title">钱包驻留金额</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value" id="wallet-display">0.00</div>
             </div>
             <div class="grid-card bg-2">
                 <div class="card-icon">⚽</div>
@@ -277,79 +300,97 @@
     <!-- 存款页面 -->
     <div id="deposit-page" class="page">
         <button class="back-btn" id="back-from-deposit">← 返回</button>
-        <h2 class="page-title">存款方式</h2>
+        <h2 class="page-title">存款</h2>
+        
+        <div class="form-box">
+            <label class="form-label">存款金额</label>
+            <input type="number" id="deposit-amount" class="form-input" placeholder="请输入存款金额" min="0" step="1">
+        </div>
+
+        <h3 style="margin-bottom: 15px; font-size: 16px; color: #333;">选择支付方式</h3>
         <div class="payment-grid">
-            <div class="payment-item">
+            <div class="payment-item" data-name="快捷虚拟币" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">加送0.3%</span>
                 <div>快捷虚拟币</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="EB直充" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">推荐</span>
                 <div>EB直充</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="EBpay虚拟币" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">加送0.3%</span>
                 <div>EBpay虚拟币</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="EBpay" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">推荐</span>
                 <div>EBpay</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="支付宝" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">推荐</span>
                 <div>支付宝</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="支付宝零钱" data-qrcode="/* 替换链接 */">
                 <div>支付宝零钱</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="云闪付零钱" data-qrcode="/* 替换链接 */">
                 <div>云闪付零钱</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="微信零钱" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">推荐</span>
                 <div>微信零钱</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="支付宝速存" data-qrcode="/* 替换链接 */">
                 <span class="payment-tag">推荐</span>
                 <div>支付宝速存</div>
             </div>
-            <div class="payment-item">
-                <div>支付宝</div>
-            </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="云闪付转卡" data-qrcode="/* 替换链接 */">
                 <div>云闪付转卡</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="微信转卡" data-qrcode="/* 替换链接 */">
                 <div>微信转卡</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="京东转卡" data-qrcode="/* 替换链接 */">
                 <div>京东转卡</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="数字人民币" data-qrcode="/* 替换链接 */">
                 <div>数字人民币</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="支付宝H5" data-qrcode="/* 替换链接 */">
                 <div>支付宝H5</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="网银转账" data-qrcode="/* 替换链接 */">
                 <div>网银转账</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="U卡支付" data-qrcode="/* 替换链接 */">
                 <div>U卡支付</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="icash.one" data-qrcode="/* 替换链接 */">
                 <div>icash.one</div>
             </div>
-            <div class="payment-item">
+            <div class="payment-item" data-name="HK转数快" data-qrcode="/* 替换链接 */">
                 <div>HK转数快</div>
             </div>
+        </div>
+
+        <div class="qrcode-box" id="qrcode-box">
+            <div class="qrcode-img" id="qrcode-img">请先选择支付方式</div>
+            <div class="qrcode-name" id="qrcode-name"></div>
+            <div class="qrcode-tip">请保存二维码图片，使用对应APP扫码支付</div>
+            <button class="form-btn confirm" id="confirm-deposit" style="margin-top: 20px;">确认存款</button>
         </div>
     </div>
 
     <!-- 取款页面 -->
     <div id="withdraw-page" class="page">
         <button class="back-btn" id="back-from-withdraw">← 返回</button>
-        <h2 class="page-title">取款方式</h2>
+        <h2 class="page-title">取款</h2>
+        
+        <div class="form-box">
+            <label class="form-label">取款金额</label>
+            <input type="number" id="withdraw-amount" class="form-input" placeholder="请输入取款金额" min="0" step="1">
+            <button class="form-btn confirm" id="confirm-withdraw">确认取款</button>
+        </div>
+
         <div class="withdraw-tabs">
             <button class="withdraw-tab">微信取款</button>
             <button class="withdraw-tab active">EBpay提币(即时到账)</button>
@@ -364,34 +405,129 @@
     </div>
 
     <script>
-        // 页面切换函数
-        function showPage(pageId) {
-            // 隐藏所有页面
-            document.querySelectorAll('.page').forEach(p => {
-                p.classList.remove('active');
-            });
-            // 显示目标页面
-            document.getElementById(pageId).classList.add('active');
+        // 账户数据
+        let cashBalance = 100000.00;   // 现金额度固定
+        let walletBalance = 0.00;      // 钱包额度
+        let selectedPayment = null;     // 选中的支付方式
+
+        // 更新显示
+        function updateDisplay() {
+            const total = cashBalance + walletBalance;
+            document.getElementById('total-balance').textContent = total.toFixed(2);
+            document.getElementById('cash-balance').textContent = cashBalance.toFixed(2);
+            document.getElementById('wallet-balance').textContent = walletBalance.toFixed(2);
+            document.getElementById('wallet-display').textContent = walletBalance.toFixed(2);
         }
 
-        // 绑定按钮点击事件
+        // 页面切换
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            if (pageId === 'main-page') {
+                document.getElementById('qrcode-box').classList.remove('show');
+                document.querySelectorAll('.payment-item').forEach(el => el.classList.remove('active'));
+                selectedPayment = null;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            updateDisplay();
+
             // 主页按钮
-            document.getElementById('btn-deposit').addEventListener('click', function() {
-                showPage('deposit-page');
+            document.getElementById('btn-deposit').addEventListener('click', () => showPage('deposit-page'));
+            document.getElementById('btn-withdraw').addEventListener('click', () => showPage('withdraw-page'));
+            document.getElementById('btn-add').addEventListener('click', () => {
+                const amt = prompt('请输入上分金额：');
+                if (amt && !isNaN(amt) && Number(amt) > 0) {
+                    walletBalance += Number(amt);
+                    updateDisplay();
+                    alert('上分成功！钱包额度：' + walletBalance.toFixed(2));
+                }
             });
-            document.getElementById('btn-withdraw').addEventListener('click', function() {
-                showPage('withdraw-page');
+            document.getElementById('btn-sub').addEventListener('click', () => {
+                const amt = prompt('请输入下分金额：');
+                if (amt && !isNaN(amt) && Number(amt) > 0 && Number(amt) <= walletBalance) {
+                    walletBalance -= Number(amt);
+                    updateDisplay();
+                    alert('下分成功！钱包额度：' + walletBalance.toFixed(2));
+                } else if (amt) {
+                    alert('金额不足！');
+                }
             });
-            document.getElementById('btn-refresh').addEventListener('click', function() {
-                location.reload();
+            document.getElementById('btn-refresh').addEventListener('click', () => location.reload());
+
+            // H5/PC 切换
+            const btnPc = document.getElementById('btn-pc');
+            const btnH5 = document.getElementById('btn-h5');
+            btnPc.addEventListener('click', () => {
+                btnPc.classList.add('active'); btnH5.classList.remove('active');
+                document.body.style.maxWidth = '1200px'; document.body.style.margin = '0 auto';
+            });
+            btnH5.addEventListener('click', () => {
+                btnH5.classList.add('active'); btnPc.classList.remove('active');
+                document.body.style.maxWidth = '480px'; document.body.style.margin = '0 auto';
             });
 
             // 返回按钮
-            document.getElementById('back-from-deposit').addEventListener('click', function() {
+            document.getElementById('back-from-deposit').addEventListener('click', () => showPage('main-page'));
+            document.getElementById('back-from-withdraw').addEventListener('click', () => showPage('main-page'));
+
+            // 选择支付方式
+            const qrcodeBox = document.getElementById('qrcode-box');
+            const qrcodeName = document.getElementById('qrcode-name');
+            const qrcodeImg = document.getElementById('qrcode-img');
+
+            document.querySelectorAll('.payment-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-item').forEach(el => el.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedPayment = {
+                        name: this.getAttribute('data-name'),
+                        qr: this.getAttribute('data-qrcode')
+                    };
+                    qrcodeName.textContent = selectedPayment.name;
+                    if (selectedPayment.qr && selectedPayment.qr !== '/* 替换链接 */') {
+                        qrcodeImg.innerHTML = `<img src="${selectedPayment.qr}" alt="${selectedPayment.name}">`;
+                    } else {
+                        qrcodeImg.innerHTML = '待设置';
+                    }
+                    qrcodeBox.classList.add('show');
+                });
+            });
+
+            // 确认存款
+            document.getElementById('confirm-deposit').addEventListener('click', function() {
+                const amount = parseFloat(document.getElementById('deposit-amount').value);
+                if (!amount || amount <= 0) {
+                    alert('请输入有效的存款金额！');
+                    return;
+                }
+                if (!selectedPayment) {
+                    alert('请先选择支付方式！');
+                    return;
+                }
+                walletBalance += amount;
+                updateDisplay();
+                alert(`存款成功！\n金额：${amount.toFixed(2)}\n方式：${selectedPayment.name}\n当前钱包额度：${walletBalance.toFixed(2)}`);
+                document.getElementById('deposit-amount').value = '';
                 showPage('main-page');
             });
-            document.getElementById('back-from-withdraw').addEventListener('click', function() {
+
+            // 确认取款
+            document.getElementById('confirm-withdraw').addEventListener('click', function() {
+                const amount = parseFloat(document.getElementById('withdraw-amount').value);
+                if (!amount || amount <= 0) {
+                    alert('请输入有效的取款金额！');
+                    return;
+                }
+                if (amount > walletBalance) {
+                    alert(`余额不足！\n当前钱包额度：${walletBalance.toFixed(2)}`);
+                    return;
+                }
+                walletBalance -= amount;
+                updateDisplay();
+                alert(`取款成功！\n金额：${amount.toFixed(2)}\n当前钱包额度：${walletBalance.toFixed(2)}`);
+                document.getElementById('withdraw-amount').value = '';
                 showPage('main-page');
             });
         });
