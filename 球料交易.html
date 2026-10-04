@@ -16,28 +16,55 @@
         .nav a:hover, .nav a.active {background:var(--primary); color:#fff;}
         .balance-box {background:#fef3c7; color:#d97706; padding:8px 16px; border-radius:20px; font-size:14px; white-space:nowrap;}
         .balance-box strong {font-size:16px;}
-        .kefu-header-link {background:var(--success); color:#fff; padding:8px 16px; border-radius:20px; font-size:14px; text-decoration:none; font-weight:600; white-space:nowrap; border:none; cursor:pointer;}
-        .container {max-width:1200px; margin:0 auto; padding:24px 20px;}
+        .kefu-btn {background:var(--success); color:#fff; padding:8px 16px; border-radius:20px; font-size:14px; text-decoration:none; font-weight:600; border:none; cursor:pointer; white-space:nowrap;}
+        .register-bar {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; padding:14px 20px; text-align:center; margin-bottom:24px; border-radius:12px;}
+        .register-title {font-size:16px; font-weight:600; margin-bottom:8px;}
+        .register-link {background:#fff; color:#2563eb; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:700; display:inline-block; margin-top:6px;}
+        .admin-panel {background:#fff; border-radius:12px; padding:20px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:none;}
+        .admin-panel.show {display:block;}
+        .admin-title {font-size:18px; font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;}
+        .admin-toggle {font-size:13px; background:#e5e7eb; padding:6px 12px; border-radius:16px; cursor:pointer;}
+        .form-row {display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;}
+        .form-input {flex:1; min-width:180px; padding:10px 14px; border:1px solid #e5e7eb; border-radius:8px; font-size:14px;}
+        .form-btn {padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
+        .btn-primary {background:var(--primary); color:#fff;}
+        .btn-success {background:var(--success); color:#fff;}
+        .btn-danger {background:var(--danger); color:#fff;}
+        .goods-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:24px;}
+        .goods-card {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .3s; position:relative;}
+        .goods-card:hover {transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+        .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;}
+        .goods-img img {width:100%; height:100%; object-fit:cover;}
+        .goods-img.locked img {filter:blur(6px);}
+        .goods-img.locked::after {content:'🔒 已锁定'; position:absolute; inset:0; background:rgba(0,0,0,0.5); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:600;}
+        .goods-body {padding:18px;}
+        .goods-name {font-size:17px; font-weight:600; margin-bottom:8px; line-height:1.4;}
+        .goods-desc {font-size:13px; color:var(--gray); margin-bottom:14px; min-height:40px; line-height:1.5;}
+        .goods-price {font-size:24px; font-weight:700; color:var(--danger); margin-bottom:14px;}
+        .goods-admin-bar {position:absolute; top:8px; right:8px; display:none; gap:6px;}
+        .goods-admin-bar.show {display:flex;}
+        .goods-admin-btn {padding:4px 8px; font-size:12px; border:none; border-radius:4px; cursor:pointer; background:rgba(0,0,0,.5); color:#fff;}
+        .btn {padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
+        .btn-sm {padding:6px 12px; font-size:13px;}
+        .btn-block {width:100%;}
+        .empty {text-align:center; padding:60px 20px; color:#9ca3af;}
+        .order-item {background:#fff; border-radius:12px; padding:20px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+        .order-header {display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+        .order-name {font-weight:600; font-size:16px;}
+        .order-status {padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600;}
+        .status-pending {background:#fef3c7; color:#d97706;}
+        .status-paid {background:#d1fae5; color:#059661;}
+        .order-img {width:120px; border-radius:8px; margin:10px 0; display:none;}
+        .order-img.show {display:block;}
+        .order-info {font-size:13px; color:#6b7280; margin-top:8px;}
+        .wallet-card {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; border-radius:16px; padding:40px; text-align:center; max-width:500px; margin:0 auto;}
+        .wallet-amount {font-size:48px; font-weight:700; margin:15px 0;}
+        .wallet-btns {display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; justify-content:center;}
+        .wallet-btns .btn {background:rgba(255,255,255,.2); color:#fff;}
         .page {display:none;}
         .page.active {display:block;}
         .search-bar {display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;}
         .search-input {flex:1; min-width:250px; padding:14px 20px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px;}
-        .btn {padding:12px 24px; border:none; border-radius:10px; font-size:15px; cursor:pointer; white-space:nowrap;}
-        .btn-primary {background:var(--primary); color:#fff;}
-        .btn-success {background:var(--success); color:#fff;}
-        .btn-sm {padding:8px 14px; font-size:14px;}
-        .btn-block {width:100%;}
-        .goods-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px;}
-        .goods-card {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .3s;}
-        .goods-card:hover {transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-        .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; font-size:48px; color:var(--primary); overflow:hidden;}
-        .goods-img img {width:100%; height:100%; object-fit:cover;}
-        .goods-body {padding:16px;}
-        .goods-name {font-size:16px; font-weight:600; margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-        .goods-desc {font-size:13px; color:var(--gray); margin-bottom:12px; min-height:40px; line-height:1.5;}
-        .goods-price {font-size:22px; font-weight:700; color:var(--danger);}
-        .goods-meta {display:flex; justify-content:space-between; margin-top:12px; font-size:12px; color:#9ca3af;}
-        .empty {text-align:center; padding:60px 20px; color:#9ca3af; grid-column:1/-1;}
         /* 客服悬浮 */
         .kefu-float {position:fixed; bottom:30px; right:30px; z-index:999;}
         .kefu-float-btn {width:60px; height:60px; background:var(--success); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; cursor:pointer; box-shadow:0 4px 15px rgba(7,193,96,.4); transition:all .3s;}
@@ -49,7 +76,7 @@
         .kefu-float-avatar {width:60px; height:60px; background:#e6f7ee; border-radius:50%; margin:0 auto 15px; display:flex; align-items:center; justify-content:center; font-size:30px;}
         .kefu-float-name {font-weight:600; margin-bottom:5px;}
         .kefu-float-desc {color:#6b7280; font-size:13px; margin-bottom:20px;}
-        .kefu-float-link {display:block; background:var(--success); color:#fff; text-decoration:none; padding:12px; border-radius:8px; margin-bottom:10px; font-weight:600; border:none; cursor:pointer; font-size:16px;}
+        .kefu-float-link {display:block; background:var(--success); color:#fff; text-decoration:none; padding:12px; border-radius:8px; margin-bottom:10px; font-weight:600; border:none; cursor:pointer; font-size:16px; width:100%;}
         .kefu-float-link.qq {background:#12b7f5;}
         @media (max-width:768px) {
             .header-inner {flex-direction:column; gap:12px; padding:12px 0; height:auto;}
@@ -69,34 +96,64 @@
         </nav>
         <div style="display:flex; gap:10px; align-items:center;">
             <div class="balance-box">余额：<strong id="balance">0.00</strong> 元</div>
-            <button class="kefu-header-link" onclick="showKefu()">💬 客服</button>
+            <button class="kefu-btn" onclick="showKefu()">💬 客服</button>
         </div>
     </div>
 </header>
 
 <main class="container">
+    <!-- 商品广场 -->
     <section id="home" class="page active">
+        <!-- 专属注册入口 -->
+        <div class="register-bar">
+            <div class="register-title">🎁 专属通道 - 新用户注册享福利</div>
+            <div>仅限从本页面注册的用户享受专属福利</div>
+            <a href="这里替换成你的注册链接" target="_blank" class="register-link">👉 立即注册</a>
+        </div>
+
+        <!-- 管理员面板 - 只有你能看到 -->
+        <div class="admin-panel" id="admin-panel">
+            <div class="admin-title">
+                🔐 管理员上架商品
+                <span class="admin-toggle" onclick="toggleAdmin()">收起</span>
+            </div>
+            <div class="form-row">
+                <input type="text" class="form-input" id="new-name" placeholder="商品名称">
+                <input type="number" class="form-input" id="new-price" placeholder="价格" step="0.01">
+            </div>
+            <div class="form-row">
+                <input type="text" class="form-input" id="new-desc" placeholder="商品描述">
+                <input type="text" class="form-input" id="new-img" placeholder="图片直链（Postimg直接链接）">
+                <button class="form-btn btn-primary" onclick="adminAddGoods()">✅ 上架</button>
+            </div>
+        </div>
+        <div style="text-align:center; margin-bottom:16px;">
+            <button class="btn btn-sm" style="background:#e5e7eb; color:#374151;" onclick="toggleAdminPanel()">🔐 管理员入口</button>
+        </div>
+        
         <div class="search-bar">
-            <input type="text" class="search-input" id="search-input" placeholder="搜索你想要的宝贝...">
+            <input type="text" class="search-input" id="search-input" placeholder="搜索商品名称...">
             <button class="btn btn-primary" id="search-btn">搜索</button>
-            <button class="btn btn-success" id="quick-publish">+ 发布</button>
         </div>
         <div class="goods-grid" id="goods-grid"></div>
     </section>
 
+    <!-- 我的订单 -->
     <section id="orders" class="page">
-        <h2 style="margin-bottom:20px;">我的订单</h2>
-        <div id="order-list"><div class="empty"><p>暂无订单记录</p></div></div>
+        <h2 style="margin-bottom:20px;">📋 我的订单</h2>
+        <div id="order-list"><div class="empty">暂无订单，快去选购吧！</div></div>
     </section>
 
+    <!-- 资金钱包 -->
     <section id="wallet" class="page">
-        <div style="background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; border-radius:16px; padding:40px; text-align:center; max-width:500px; margin:0 auto;">
+        <div class="wallet-card">
             <div style="font-size:18px;">账户余额</div>
-            <div style="font-size:48px; font-weight:700; margin:15px 0;">¥ <span id="w-balance">0.00</span></div>
-            <div style="opacity:.8; font-size:14px;">安全 · 正规 · 可提现</div>
-            <div style="display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; justify-content:center;">
-                <button class="btn" style="background:rgba(255,255,255,.2); color:#fff;" id="recharge-btn">💰 充值</button>
-                <button class="btn" style="background:rgba(255,255,255,.2); color:#fff;" id="withdraw-btn">💳 提现</button>
+            <div class="wallet-amount">¥ <span id="w-balance">0.00</span></div>
+            <div style="opacity:.8; font-size:14px; margin-bottom:10px;">安全 · 正规 · 可提现</div>
+            <div style="font-size:13px; opacity:.7; margin-bottom:20px;">充值/提现 请联系客服</div>
+            <div class="wallet-btns">
+                <button class="btn" id="recharge-btn">💰 充值</button>
+                <button class="btn" id="withdraw-btn">💳 提现</button>
             </div>
         </div>
     </section>
@@ -111,126 +168,274 @@
             <div class="kefu-float-avatar">👨‍💼</div>
             <div class="kefu-float-name">V8官方客服</div>
             <div class="kefu-float-desc">工作时间：09:00-24:00<br>竭诚为您服务</div>
-            <button class="kefu-float-link" onclick="alert('请添加微信：\nAA9767A')">💚 微信联系</button>
-            <button class="kefu-float-link qq" onclick="alert('请添加QQ：\n142749228')">🐧 QQ联系</button>
+            <button class="kefu-float-link" onclick="alert('请添加微信：\n你的微信号')">💚 微信联系</button>
+            <button class="kefu-float-link qq" onclick="alert('请添加QQ：\n你的QQ号')">🐧 QQ联系</button>
         </div>
     </div>
 </div>
 
 <script>
-// 👇 在这里填写你的商品信息
+// ========== 管理员密码（改成你自己的）==========
+const ADMIN_PASSWORD = '123456'; // ← 改成你的密码
+
+// ========== 专属注册链接（改成你的）==========
+const REGISTER_URL = '这里替换成你的注册链接';
+
+// ========== 商品库 - 只有管理员能修改 ==========
 let goodsList = [
     {
         id: 1,
         name: '雷速拉坦伊布拉莫维奇',
-        price: 199,
+        price: 18,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: 'https://i.postimg.cc/tJWSmNyD/yi-bu.jpg'
+        img: 'https://i.postimg.cc/tJWSmNyD/yi-bu.jpg',
+        unlocked: false
     },
     {
         id: 2,
         name: '雷速傻哥专业连红搬运',
-        price: 150,
+        price: 18,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: 'https://i.postimg.cc/xdXP433G/sha-ge.jpg'
+        img: 'https://i.postimg.cc/xdXP433G/sha-ge.jpg',
+        unlocked: false
     },
     {
         id: 3,
         name: '雷速弘扬奉献精神的阿火',
-        price: 85,
+        price: 18,
         desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: 'https://i.postimg.cc/qMpxTTG7/a-huo.jpg'
+        img: 'https://i.postimg.cc/qMpxTTG7/a-huo.jpg', // ← 替换成阿火的链接
+        unlocked: false
     }
+        {
+        id: 4,
+        name: '雷速上岸的十串神',
+        price: 150,
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
+        img: 'https://i.postimg.cc/BbjLqmtp/shi-chuan-shen.jpg',
+        unlocked: false
+    },
 ];
 
 let balance = 0.00;
 let orders = [];
+let isAdmin = false;
+
+// 保存/读取数据
+function saveData() {
+    localStorage.setItem('v8_goods', JSON.stringify(goodsList));
+    localStorage.setItem('v8_orders', JSON.stringify(orders));
+    localStorage.setItem('v8_balance', balance.toString());
+}
+function loadData() {
+    const g = localStorage.getItem('v8_goods');
+    const o = localStorage.getItem('v8_orders');
+    const b = localStorage.getItem('v8_balance');
+    if (g) goodsList = JSON.parse(g);
+    if (o) orders = JSON.parse(o);
+    if (b) balance = parseFloat(b);
+}
 
 function showKefu() {
-    alert('微信：AA9767A\nQQ群：142749228\n请添加好友联系客服');
+    alert('微信：你的微信号\nQQ：你的QQ号\n充值/提现/解锁 请联系客服');
+}
+
+// 管理员入口验证
+function toggleAdminPanel() {
+    if (isAdmin) {
+        document.getElementById('admin-panel').classList.toggle('show');
+        return;
+    }
+    const pwd = prompt('请输入管理员密码：');
+    if (pwd === ADMIN_PASSWORD) {
+        isAdmin = true;
+        document.getElementById('admin-panel').classList.add('show');
+        alert('✅ 管理员模式已开启\n只有你能看到上架/删除按钮');
+    } else if (pwd) {
+        alert('❌ 密码错误');
+    }
+}
+function toggleAdmin() {
+    document.getElementById('admin-panel').classList.remove('show');
+}
+
+// 管理员上架商品
+function adminAddGoods() {
+    if (!isAdmin) return alert('请先验证管理员密码');
+    const name = document.getElementById('new-name').value.trim();
+    const price = parseFloat(document.getElementById('new-price').value);
+    const desc = document.getElementById('new-desc').value.trim() || 'v8体育官方特供';
+    const img = document.getElementById('new-img').value.trim();
+    
+    if (!name || !price || price <= 0 || !img) {
+        return alert('请填写完整信息：名称、价格、图片链接');
+    }
+    
+    const newId = goodsList.length ? Math.max(...goodsList.map(g => g.id)) + 1 : 1;
+    goodsList.push({
+        id: newId,
+        name,
+        price,
+        desc,
+        img,
+        unlocked: false
+    });
+    
+    // 清空输入框
+    document.getElementById('new-name').value = '';
+    document.getElementById('new-price').value = '';
+    document.getElementById('new-desc').value = '';
+    document.getElementById('new-img').value = '';
+    
+    saveData();
+    alert('✅ 商品上架成功！');
+    renderGoods();
+}
+
+// 管理员删除商品
+function adminDeleteGoods(id) {
+    if (!isAdmin) return;
+    if (!confirm('确定删除此商品？')) return;
+    goodsList = goodsList.filter(g => g.id !== id);
+    saveData();
+    renderGoods();
 }
 
 function switchPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
     document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+    document.getElementById(pageId).classList.add('active');
     if (pageId === 'home') renderGoods();
-    if (pageId === 'wallet') document.getElementById('w-balance').textContent = balance.toFixed(2);
+    if (pageId === 'orders') renderOrders();
+    if (pageId === 'wallet') {
+        document.getElementById('w-balance').textContent = balance.toFixed(2);
+    }
 }
 
 function renderGoods(list = goodsList) {
     const grid = document.getElementById('goods-grid');
     if (!list.length) {
-        grid.innerHTML = `<div class="empty"><p>暂无商品，点击右上角「+发布」添加</p></div>`;
+        grid.innerHTML = `<div class="empty">暂无商品，敬请期待</div>`;
         return;
     }
     grid.innerHTML = list.map(item => `
         <div class="goods-card">
-            <div class="goods-img">
-                ${item.img 
-                    ? `<img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='📦'">` 
-                    : '📦'
-                }
+            ${isAdmin ? `
+                <div class="goods-admin-bar show">
+                    <button class="goods-admin-btn" onclick="adminDeleteGoods(${item.id})">删除</button>
+                </div>
+            ` : ''}
+            <div class="goods-img ${item.unlocked ? '' : 'locked'}">
+                <img src="${item.img}" alt="${item.name}" onerror="this.parentElement.innerHTML='📦'">
             </div>
             <div class="goods-body">
                 <div class="goods-name">${item.name}</div>
                 <div class="goods-desc">${item.desc}</div>
                 <div class="goods-price">¥${item.price.toFixed(2)}</div>
-                <button class="btn btn-primary btn-sm btn-block" style="margin-top:12px;" onclick="buyItem(${item.id})">立即购买</button>
+                ${item.unlocked 
+                    ? '<button class="btn btn-success btn-sm btn-block" disabled>✅ 已解锁</button>' 
+                    : `<button class="btn btn-primary btn-sm btn-block" onclick="buyItem(${item.id})">立即购买</button>`
+                }
             </div>
+        </div>
+    `).join('');
+}
+
+function renderOrders() {
+    const list = document.getElementById('order-list');
+    if (!orders.length) {
+        list.innerHTML = `<div class="empty">暂无订单记录</div>`;
+        return;
+    }
+    list.innerHTML = orders.map(item => `
+        <div class="order-item">
+            <div class="order-header">
+                <div class="order-name">${item.name}</div>
+                <div class="order-status ${item.unlocked ? 'status-paid' : 'status-pending'}">
+                    ${item.unlocked ? '✅ 已解锁' : '⏳ 待解锁'}
+                </div>
+            </div>
+            <div class="order-info">
+                金额：¥${item.price.toFixed(2)}<br>
+                时间：${item.time}
+            </div>
+            <img src="${item.img}" class="order-img ${item.unlocked ? 'show' : ''}" alt="${item.name}">
+            ${!item.unlocked 
+                ? `<button class="btn btn-success btn-sm" style="margin-top:10px;" onclick="alert('请联系客服解锁')">🔓 联系客服解锁</button>` 
+                : ''
+            }
         </div>
     `).join('');
 }
 
 function buyItem(id) {
     const item = goodsList.find(g => g.id === id);
-    if (!item) return;
-    if (confirm(`确认购买【${item.name}】？\n价格：¥${item.price.toFixed(2)}\n余额：¥${balance.toFixed(2)}`)) {
-        if (balance < item.price) { alert('余额不足，请先充值！'); switchPage('wallet'); return; }
-        balance -= item.price;
-        document.getElementById('balance').textContent = balance.toFixed(2);
-        orders.unshift({ name: item.name, price: item.price, time: new Date().toLocaleString() });
-        alert('下单成功！');
+    if (!item || item.unlocked) return;
+    
+    if (balance < item.price) {
+        alert(`余额不足！\n需要：¥${item.price}\n当前：¥${balance.toFixed(2)}\n请先充值或联系客服`);
+        return;
     }
+    
+    if (!confirm(`确认购买【${item.name}】？\n价格：¥${item.price}\n余额：¥${balance.toFixed(2)}`)) return;
+    
+    balance -= item.price;
+    item.unlocked = true;
+    
+    orders.unshift({
+        goodsId: item.id,
+        name: item.name,
+        price: item.price,
+        img: item.img,
+        unlocked: true,
+        time: new Date().toLocaleString('zh-CN')
+    });
+    
+    saveData();
+    document.getElementById('balance').textContent = balance.toFixed(2);
+    alert(`购买成功！✅\n商品已自动解锁\n请到「我的订单」查看`);
+    renderGoods();
 }
 
 function searchGoods() {
     const kw = document.getElementById('search-input').value.trim().toLowerCase();
     if (!kw) return renderGoods();
-    renderGoods(goodsList.filter(g => g.name.toLowerCase().includes(kw) || g.desc.toLowerCase().includes(kw)));
+    renderGoods(goodsList.filter(g => g.name.toLowerCase().includes(kw)));
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    loadData();
+    
     document.querySelectorAll('.nav a').forEach(a => {
-        a.addEventListener('click', e => { e.preventDefault(); switchPage(a.getAttribute('data-page')); });
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            switchPage(a.getAttribute('data-page'));
+        });
     });
+    
     renderGoods();
     document.getElementById('balance').textContent = balance.toFixed(2);
+    
     document.getElementById('search-btn').addEventListener('click', searchGoods);
     document.getElementById('search-input').addEventListener('keydown', e => e.key === 'Enter' && searchGoods());
+    
     document.getElementById('recharge-btn').addEventListener('click', () => {
         const num = parseFloat(prompt('请输入充值金额：'));
-        if (num && num > 0) { balance += num; document.getElementById('balance').textContent = balance.toFixed(2); alert('充值成功！'); }
+        if (!num || num <= 0) return alert('金额错误！');
+        balance += num;
+        saveData();
+        document.getElementById('balance').textContent = balance.toFixed(2);
+        alert(`充值成功！🎉\n当前余额：¥${balance.toFixed(2)}`);
     });
+    
     document.getElementById('withdraw-btn').addEventListener('click', () => {
         const num = parseFloat(prompt('请输入提现金额：'));
-        if (num && num > 0 && num <= balance) { balance -= num; document.getElementById('balance').textContent = balance.toFixed(2); alert('提现申请提交！'); }
-        else alert('金额无效或余额不足！');
-    });
-    document.getElementById('quick-publish').addEventListener('click', () => {
-        const name = prompt('商品名称：');
-        const price = parseFloat(prompt('价格：'));
-        if (!name || !price) return alert('填写不完整！');
-        goodsList.unshift({
-            id: Date.now(),
-            name,
-            price,
-            desc: prompt('商品描述：') || 'v8体育官方特供',
-            img: prompt('图片链接（右键复制imgur图片地址）：') || ''
-        });
-        alert('发布成功！🎉');
-        renderGoods();
+        if (!num || num <= 0 || num > balance) return alert('金额错误或余额不足！');
+        balance -= num;
+        saveData();
+        document.getElementById('balance').textContent = balance.toFixed(2);
+        alert(`提现申请提交！✅\n请联系客服处理\n当前余额：¥${balance.toFixed(2)}`);
     });
 });
 </script>
