@@ -80,7 +80,7 @@
         .add { background: #8b5cf6; }
         .sub { background: #ec4899; }
 
-        /* 模块网格 */
+        /* 模块网格 - 可点击 */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -92,9 +92,13 @@
             padding: 30px 20px;
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .grid-card:hover { transform: translateY(-3px); }
+        .grid-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
         .card-icon { font-size: 45px; margin-bottom: 15px; }
         .card-title { font-size: 16px; color: #333; margin-bottom: 8px; }
         .card-value { font-size: 14px; color: #888; }
@@ -122,6 +126,40 @@
             margin-bottom: 25px;
         }
         .page-title { font-size: 20px; margin-bottom: 25px; color: #333; }
+
+        /* 下注页面 */
+        .bet-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 600px;
+        }
+        .bet-icon { font-size: 60px; margin-bottom: 20px; }
+        .bet-name { font-size: 22px; font-weight: bold; color: #333; margin-bottom: 10px; }
+        .bet-tip { font-size: 15px; color: #666; margin-bottom: 25px; }
+        .bet-link-box {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            word-break: break-all;
+            color: #4b5563;
+            font-size: 14px;
+        }
+        .bet-btn {
+            display: inline-block;
+            padding: 12px 40px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+        .bet-btn:hover { background: #1d4ed8; }
 
         /* 表单样式 */
         .form-box {
@@ -254,46 +292,58 @@
         </div>
 
         <div class="grid-container">
-            <div class="grid-card bg-1">
+            <div class="grid-card bg-1" data-type="wallet">
                 <div class="card-icon">💰</div>
                 <div class="card-title">钱包驻留金额</div>
                 <div class="card-value" id="wallet-display">0.00</div>
             </div>
-            <div class="grid-card bg-2">
+            <div class="grid-card bg-2" data-type="sport">
                 <div class="card-icon">⚽</div>
                 <div class="card-title">体育</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
-            <div class="grid-card bg-3">
+            <div class="grid-card bg-3" data-type="live">
                 <div class="card-icon">🎲</div>
                 <div class="card-title">真人</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
-            <div class="grid-card bg-4">
+            <div class="grid-card bg-4" data-type="chess">
                 <div class="card-icon">🀄</div>
                 <div class="card-title">棋牌</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
-            <div class="grid-card bg-5">
+            <div class="grid-card bg-5" data-type="esport">
                 <div class="card-icon">⚔️</div>
                 <div class="card-title">电竞</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
-            <div class="grid-card bg-6">
+            <div class="grid-card bg-6" data-type="lottery">
                 <div class="card-icon">🎫</div>
                 <div class="card-title">彩票</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
-            <div class="grid-card bg-7">
+            <div class="grid-card bg-7" data-type="game">
                 <div class="card-icon">🐟</div>
                 <div class="card-title">电游</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
-            <div class="grid-card bg-8">
+            <div class="grid-card bg-8" data-type="slot">
                 <div class="card-icon">🦁</div>
                 <div class="card-title">老虎机</div>
-                <div class="card-value">0.00</div>
+                <div class="card-value">点击进入</div>
             </div>
+        </div>
+    </div>
+
+    <!-- 下注通用页面 -->
+    <div id="bet-page" class="page">
+        <button class="back-btn" id="back-from-bet">← 返回</button>
+        <div class="bet-box">
+            <div class="bet-icon" id="bet-icon">⚽</div>
+            <div class="bet-name" id="bet-name">体育</div>
+            <div class="bet-tip">点击下方按钮进入下注平台</div>
+            <div class="bet-link-box" id="bet-link">待设置链接</div>
+            <a class="bet-btn" id="bet-enter" href="#" target="_blank">立即进入</a>
         </div>
     </div>
 
@@ -406,9 +456,20 @@
 
     <script>
         // 账户数据
-        let cashBalance = 100000.00;   // 现金额度固定
-        let walletBalance = 0.00;      // 钱包额度
-        let selectedPayment = null;     // 选中的支付方式
+        let cashBalance = 100000.00;
+        let walletBalance = 0.00;
+        let selectedPayment = null;
+
+        // 各板块链接配置 —— 在这里填入对应链接即可生效
+        const BET_CONFIG = {
+            sport:  { name: '体育',  icon: '⚽', url: '/* 替换为体育链接 */' },
+            live:   { name: '真人',  icon: '🎲', url: '/* 替换为真人链接 */' },
+            chess:  { name: '棋牌',  icon: '🀄', url: '/* 替换为棋牌链接 */' },
+            esport: { name: '电竞',  icon: '⚔️', url: '/* 替换为电竞链接 */' },
+            lottery:{ name: '彩票',  icon: '🎫', url: '/* 替换为彩票链接 */' },
+            game:   { name: '电游',  icon: '🐟', url: '/* 替换为电游链接 */' },
+            slot:   { name: '老虎机', icon: '🦁', url: '/* 替换为老虎机链接 */' }
+        };
 
         // 更新显示
         function updateDisplay() {
@@ -428,6 +489,27 @@
                 document.querySelectorAll('.payment-item').forEach(el => el.classList.remove('active'));
                 selectedPayment = null;
             }
+        }
+
+        // 打开下注页面
+        function showBetPage(type) {
+            const cfg = BET_CONFIG[type];
+            if (!cfg) return;
+            
+            document.getElementById('bet-icon').textContent = cfg.icon;
+            document.getElementById('bet-name').textContent = cfg.name;
+            document.getElementById('bet-link').textContent = cfg.url;
+            
+            const enterBtn = document.getElementById('bet-enter');
+            if (cfg.url && !cfg.url.includes('替换')) {
+                enterBtn.href = cfg.url;
+                enterBtn.style.pointerEvents = 'auto';
+            } else {
+                enterBtn.href = '#';
+                enterBtn.style.pointerEvents = 'none';
+            }
+            
+            showPage('bet-page');
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -456,6 +538,14 @@
             });
             document.getElementById('btn-refresh').addEventListener('click', () => location.reload());
 
+            // 点击板块卡片跳转下注页面
+            document.querySelectorAll('.grid-card').forEach(card => {
+                const type = card.getAttribute('data-type');
+                if (type && type !== 'wallet') {
+                    card.addEventListener('click', () => showBetPage(type));
+                }
+            });
+
             // H5/PC 切换
             const btnPc = document.getElementById('btn-pc');
             const btnH5 = document.getElementById('btn-h5');
@@ -471,6 +561,7 @@
             // 返回按钮
             document.getElementById('back-from-deposit').addEventListener('click', () => showPage('main-page'));
             document.getElementById('back-from-withdraw').addEventListener('click', () => showPage('main-page'));
+            document.getElementById('back-from-bet').addEventListener('click', () => showPage('main-page'));
 
             // 选择支付方式
             const qrcodeBox = document.getElementById('qrcode-box');
