@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航展示页</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
+        body { background: #f3f4f6; padding: 20px; }
+        .container { max-width: 1280px; margin: 0 auto; }
+
+        /* 头部 */
+        .header {
+            background: #fff;
+            padding: 18px 28px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .stats { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #4b5563; }
+        .stats span { font-weight: 600; color: #111; }
+
+        /* 切换按钮 */
+        .tabs { display: flex; gap: 8px; }
+        .tab {
+            padding: 8px 22px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.25s;
+        }
+        .tab.active { background: #2563eb; color: #fff; box-shadow: 0 2px 4px rgba(37,99,235,0.3); }
+        .tab.inactive { background: #e5e7eb; color: #6b7280; }
+        .tab:hover:not(.active) { background: #d1d5db; }
+
+        .btns { display: flex; gap: 10px; }
+        .btns button {
+            padding: 9px 22px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .btn-blue { background: #2563eb; color: #fff; }
+        .btn-green { background: #16a34a; color: #fff; }
+        .btn-orange { background: #f97316; color: #fff; }
+
+        /* 画面容器 —— 切换时淡入淡出 */
+        .view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .view.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* PC版网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+        .card-img {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        .card-body { padding: 16px; }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: #1f2937; }
+        .card-desc { font-size: 14px; color: #9ca3af; }
+
+        /* H5版画面 —— 完全不一样的布局 */
+        .h5-box {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .h5-title { font-size: 24px; font-weight: bold; margin-bottom: 12px; color: #1f2937; }
+        .h5-sub { font-size: 15px; color: #6b7280; margin-bottom: 30px; }
+        .h5-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .h5-item {
+            padding: 24px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .h5-item:hover { transform: scale(1.05); }
+        .h5-icon { font-size: 40px; margin-bottom: 8px; }
+        .h5-text { font-weight: 600; font-size: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部切换栏 -->
+        <div class="header">
+            <div class="stats">
+                <div>账户总额：<span>0.00</span></div>
+                <div>现金额度：<span>0.00</span></div>
+                <div>钱包额度：<span>0.00</span></div>
+            </div>
+            <div class="tabs">
+                <div class="tab active" id="tab-pc" onclick="switchView('pc')">PC</div>
+                <div class="tab inactive" id="tab-h5" onclick="switchView('h5')">H5</div>
+            </div>
+            <div class="btns">
+                <button class="btn-blue">存款</button>
+                <button class="btn-green">取款</button>
+                <button class="btn-orange">刷新</button>
+            </div>
+        </div>
+
+        <!-- PC画面 -->
+        <div class="view active" id="view-pc">
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img" style="background: #fff7ed;">💰</div>
+                    <div class="card-body">
+                        <div class="card-title">钱包驻留金额</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #eff6ff;">⚽</div>
+                    <div class="card-body">
+                        <div class="card-title">体育</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #f0fdf4;">🎲</div>
+                    <div class="card-body">
+                        <div class="card-title">真人</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #fdf4ff;">🀄</div>
+                    <div class="card-body">
+                        <div class="card-title">棋牌</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #fef2f2;">⚔️</div>
+                    <div class="card-body">
+                        <div class="card-title">电竞</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #fefce8;">🎫</div>
+                    <div class="card-body">
+                        <div class="card-title">彩票</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #e0f2fe;">🐟</div>
+                    <div class="card-body">
+                        <div class="card-title">电游</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img" style="background: #fef3c7;">🦁</div>
+                    <div class="card-body">
+                        <div class="card-title">老虎机</div>
+                        <div class="card-desc">0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- H5画面 —— 点H5出现这个 -->
+        <div class="view" id="view-h5">
+            <div class="h5-box">
+                <div class="h5-title">📱 H5 移动端版本</div>
+                <div class="h5-subname">请用手机扫码访问或分享链接</div>
+                <div class="h5-grid">
+                    <div class="h5-item" style="background: #fff7ed;">
+                        <div class="h5-icon">💰</div>
+                        <div class="h5-text">钱包</div>
+                    </div>
+                    <div class="h5-item" style="background: #eff6ff;">
+                        <div class="h5-icon">⚽</div>
+                        <div class="h5-text">体育</div>
+                    </div>
+                    <div class="h5-item" style="background: #f0fdf4;">
+                        <div class="h5-icon">🎲</div>
+                        <div class="h5-text">真人</div>
+                    </div>
+                    <div class="h5-item" style="background: #fdf4ff;">
+                        <div class="h5-icon">🀄</div>
+                        <div class="h5-text">棋牌</div>
+                    </div>
+                    <div class="h5-item" style="background: #fef2f2;">
+                        <div class="h5-icon">⚔️</div>
+                        <div class="h5-text">电竞</div>
+                    </div>
+                    <div class="h5-item" style="background: #fefce8;">
+                        <div class="h5-icon">🎫</div>
+                        <div class="h5-text">彩票</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 切换脚本 -->
+    <script>
+        function switchView(mode) {
+            // 切换按钮样式
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.add('inactive'));
+            document.getElementById(`tab-${mode}`).classList.add('active');
+            document.getElementById(`tab-${mode}`).classList.remove('inactive');
+
+            // 切换画面内容
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.getElementById(`view-${mode}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
