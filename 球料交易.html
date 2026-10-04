@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>闲置换钱 - 二手交易平台</title>
+    <title>V8体育特供，球料分享</title>
     <style>
         * {margin:0; padding:0; box-sizing:border-box; font-family:"Microsoft YaHei", "PingFang SC", sans-serif;}
         :root {--primary:#2563eb; --success:#16a34a; --warning:#f97316; --danger:#dc2626; --gray:#6b7280; --bg:#f8fafc;}
         body {background:var(--bg); min-height:100vh;}
         .header {background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.06); padding:0 20px; position:sticky; top:0; z-index:99;}
-        .header-inner {max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:64px;}
+        .header-inner {max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:64px; flex-wrap:wrap; gap:10px;}
         .logo {font-size:22px; font-weight:700; color:var(--primary);}
-        .nav {display:flex; gap:8px;}
+        .nav {display:flex; gap:8px; flex-wrap:wrap;}
         .nav a {text-decoration:none; color:#4b5563; padding:10px 18px; border-radius:8px; font-size:15px; transition:all .2s;}
         .nav a:hover, .nav a.active {background:var(--primary); color:#fff;}
-        .balance-box {background:#fef3c7; color:#d97706; padding:8px 16px; border-radius:20px; font-size:14px;}
+        .balance-box {background:#fef3c7; color:#d97706; padding:8px 16px; border-radius:20px; font-size:14px; white-space:nowrap;}
         .balance-box strong {font-size:16px;}
         .container {max-width:1200px; margin:0 auto; padding:24px 20px;}
         .page {display:none;}
         .page.active {display:block;}
-        .search-bar {display:flex; gap:10px; margin-bottom:24px;}
-        .search-input {flex:1; padding:14px 20px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px;}
-        .btn {padding:12px 24px; border:none; border-radius:10px; font-size:15px; cursor:pointer;}
+        .search-bar {display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;}
+        .search-input {flex:1; min-width:250px; padding:14px 20px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px;}
+        .btn {padding:12px 24px; border:none; border-radius:10px; font-size:15px; cursor:pointer; white-space:nowrap;}
         .btn-primary {background:var(--primary); color:#fff;}
         .btn-success {background:var(--success); color:#fff;}
         .btn-sm {padding:8px 14px; font-size:14px;}
@@ -29,10 +29,11 @@
         .goods-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px;}
         .goods-card {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .3s;}
         .goods-card:hover {transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-        .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; font-size:48px; color:var(--primary);}
+        .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; font-size:48px; color:var(--primary); overflow:hidden;}
+        .goods-img img {width:100%; height:100%; object-fit:cover;}
         .goods-body {padding:16px;}
         .goods-name {font-size:16px; font-weight:600; margin-bottom:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-        .goods-desc {font-size:13px; color:var(--gray); margin-bottom:12px; height:36px; overflow:hidden;}
+        .goods-desc {font-size:13px; color:var(--gray); margin-bottom:12px; height:36px; overflow:hidden; line-height:1.5;}
         .goods-price {font-size:22px; font-weight:700; color:var(--danger);}
         .goods-meta {display:flex; justify-content:space-between; margin-top:12px; font-size:12px; color:#9ca3af;}
         .form-card {background:#fff; border-radius:12px; padding:30px; max-width:560px; margin:0 auto; box-shadow:0 2px 12px rgba(0,0,0,0.06);}
@@ -41,20 +42,10 @@
         .form-label {display:block; margin-bottom:8px; font-size:14px; font-weight:500;}
         .form-input, .form-textarea, .form-select {width:100%; padding:12px 16px; border:1px solid #e5e7eb; border-radius:8px; font-size:15px;}
         .form-textarea {resize:vertical; min-height:100px;}
-        .order-card {background:#fff; border-radius:12px; padding:20px; margin-bottom:16px; box-shadow:0 2px 6px rgba(0,0,0,0.04);}
-        .order-header {display:flex; justify-content:space-between; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid #f3f4f6;}
-        .order-status {padding:4px 12px; border-radius:20px; font-size:13px; font-weight:500;}
-        .status-pending {background:#fef3c7; color:#d97706;}
-        .status-done {background:#d1fae5; color:#059669;}
-        .order-body {display:flex; gap:16px;}
-        .order-img {width:80px; height:80px; background:#e5e7eb; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;}
-        .order-info {flex:1;}
-        .order-name {font-weight:600; margin-bottom:4px;}
-        .order-price {color:var(--danger); font-weight:600;}
         .wallet-card {background:linear-gradient(135deg,#2563eb,#4f46e5); color:#fff; border-radius:16px; padding:32px; text-align:center; margin-bottom:24px;}
         .wallet-amount {font-size:42px; font-weight:700; margin:12px 0;}
-        .wallet-btns {display:flex; gap:12px; margin-top:24px;}
-        .wallet-btns .btn {flex:1; background:rgba(255,255,255,.2); color:#fff; border:none;}
+        .wallet-btns {display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; justify-content:center;}
+        .wallet-btns .btn {background:rgba(255,255,255,.2); color:#fff; border:none;}
         .empty {text-align:center; padding:60px 20px; color:#9ca3af;}
         @media (max-width:768px) {
             .header-inner {flex-direction:column; gap:12px; padding:12px 0; height:auto;}
@@ -109,6 +100,10 @@
                 </select>
             </div>
             <div class="form-group">
+                <label class="form-label">图片链接</label>
+                <input type="text" class="form-input" id="g-img" placeholder="https://i.imgur.com/xxxxxx.jpg">
+            </div>
+            <div class="form-group">
                 <label class="form-label">详细描述</label>
                 <textarea class="form-textarea" id="g-desc" placeholder="成色、购买时间、是否包邮..."></textarea>
             </div>
@@ -138,31 +133,63 @@
 
 <script>
 let goodsList = [
-    {id:1,name:'雷速拉坦伊布拉莫维奇',price:199,desc:'v8体育官方特别提供，如想全免享用请联系客服',cate:'digital',seller:'用户001',time:'10分钟前',img:'https://i.imgur.com/tthwLa59.jpg'},
-    {id:2,name:'雷速傻哥专业连红搬运',price:150,desc:'v8体育官方特别提供，如想全免享用请联系客服',cate:'digital',seller:'用户002',time:'30分钟前',img:'https://imgur.com/a/RUneOSk.jpg'},
-    {id:3,name:'雷速弘扬奉献精神的阿火',price:85,desc:'v8体育官方特别提供，如想全免享用请联系客服',cate:'digital',seller:'用户003',time:'1小时前',img:'https://imgur.com/a/hhixdqi.jpg'},
+    {
+        id: 1,
+        name: '雷速拉坦伊布拉莫维奇',
+        price: 199,
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
+        cate: 'digital',
+        seller: '用户001',
+        time: '10分钟前',
+        img: 'https://i.imgur.com/tthwLa59.jpg'
+    },
+    {
+        id: 2,
+        name: '雷速傻哥专业连红搬运',
+        price: 150,
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
+        cate: 'digital',
+        seller: '用户002',
+        time: '30分钟前',
+        img: 'https://i.imgur.com/RUneOSk.jpg'
+    },
+    {
+        id: 3,
+        name: '雷速弘扬奉献精神的阿火',
+        price: 85,
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
+        cate: 'digital',
+        seller: '用户003',
+        time: '1小时前',
+        img: 'https://i.imgur.com/hhiXdqi.jpg'
+    }
 ];
 let balance = 2568.50;
 let orders = [];
 
 function switchPage(pageId) {
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
     document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
-    if(pageId==='home') renderGoods();
-    if(pageId==='wallet') document.getElementById('w-balance').textContent = balance.toFixed(2);
+    if (pageId === 'home') renderGoods();
+    if (pageId === 'wallet') document.getElementById('w-balance').textContent = balance.toFixed(2);
 }
 
-function renderGoods(list=goodsList) {
+function renderGoods(list = goodsList) {
     const grid = document.getElementById('goods-grid');
-    if(!list.length) {
+    if (!list.length) {
         grid.innerHTML = `<div class="empty" style="grid-column:1/-1;"><p>没有找到相关宝贝</p></div>`;
         return;
     }
-    grid.innerHTML = list.map(item=>`
+    grid.innerHTML = list.map(item => `
         <div class="goods-card">
-            <div class="goods-img">${item.icon}</div>
+            <div class="goods-img">
+                ${item.img 
+                    ? `<img src="${item.img}" alt="${item.name}">` 
+                    : '📦'
+                }
+            </div>
             <div class="goods-body">
                 <div class="goods-name">${item.name}</div>
                 <div class="goods-desc">${item.desc}</div>
@@ -175,13 +202,13 @@ function renderGoods(list=goodsList) {
 }
 
 function buyItem(id) {
-    const item = goodsList.find(g=>g.id===id);
-    if(!item) return;
-    if(confirm(`确认购买【${item.name}】？\n价格：¥${item.price.toFixed(2)}\n余额：¥${balance.toFixed(2)}\n\n付款后资金由平台担保，确认收货后放款给卖家`)) {
-        if(balance < item.price) { alert('余额不足，请先充值！'); switchPage('wallet'); return; }
+    const item = goodsList.find(g => g.id === id);
+    if (!item) return;
+    if (confirm(`确认购买【${item.name}】？\n价格：¥${item.price.toFixed(2)}\n余额：¥${balance.toFixed(2)}\n\n付款后资金由平台担保，确认收货后放款给卖家`)) {
+        if (balance < item.price) { alert('余额不足，请先充值！'); switchPage('wallet'); return; }
         balance -= item.price;
         document.getElementById('balance').textContent = balance.toFixed(2);
-        orders.unshift({oid:Date.now(),name:item.name,price:item.price,icon:item.icon,status:'pending',time:new Date().toLocaleString()});
+        orders.unshift({ oid: Date.now(), name: item.name, price: item.price, status: 'pending', time: new Date().toLocaleString() });
         alert('下单成功！等待卖家发货 📦');
     }
 }
@@ -191,45 +218,47 @@ function publishGoods() {
     const price = parseFloat(document.getElementById('g-price').value);
     const desc = document.getElementById('g-desc').value.trim();
     const cate = document.getElementById('g-cate').value;
-    if(!name || !price || price<=0) { alert('请填写完整的商品名称和价格！'); return; }
-    const icons = {digital:'📱',clothes:'👔',home:'🏠',other:'📦'};
+    const img = document.getElementById('g-img').value.trim();
+    if (!name || !price || price <= 0) { alert('请填写完整的商品名称和价格！'); return; }
     goodsList.unshift({
-        id:Date.now(),name,price,desc:desc||'暂无描述',cate,
-        seller:'我',time:'刚刚',icon:icons[cate]
+        id: Date.now(), name, price, desc: desc || '暂无描述', cate,
+        seller: '我', time: '刚刚', img: img || ''
     });
     alert('发布成功！🎉');
     document.getElementById('g-name').value = '';
     document.getElementById('g-price').value = '';
     document.getElementById('g-desc').value = '';
+    document.getElementById('g-img').value = '';
     switchPage('home');
 }
 
 function searchGoods() {
     const kw = document.getElementById('search-input').value.trim().toLowerCase();
-    if(!kw) return renderGoods();
-    renderGoods(goodsList.filter(g=>g.name.toLowerCase().includes(kw)||g.desc.toLowerCase().includes(kw)));
+    if (!kw) return renderGoods();
+    renderGoods(goodsList.filter(g => g.name.toLowerCase().includes(kw) || g.desc.toLowerCase().includes(kw)));
 }
 
-document.addEventListener('DOMContentLoaded',function(){
-    document.querySelectorAll('.nav a').forEach(a=>{
-        a.addEventListener('click',e=>{e.preventDefault(); switchPage(a.getAttribute('data-page'));});
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.nav a').forEach(a => {
+        a.addEventListener('click', e => { e.preventDefault(); switchPage(a.getAttribute('data-page')); });
     });
     renderGoods();
     document.getElementById('balance').textContent = balance.toFixed(2);
-    document.getElementById('publish-btn').addEventListener('click',publishGoods);
-    document.getElementById('quick-publish').addEventListener('click',()=>switchPage('publish'));
-    document.getElementById('search-btn').addEventListener('click',searchGoods);
-    document.getElementById('search-input').addEventListener('keydown',e=>e.key==='Enter'&&searchGoods());
-    document.getElementById('recharge-btn').addEventListener('click',()=>{
+    document.getElementById('publish-btn').addEventListener('click', publishGoods);
+    document.getElementById('quick-publish').addEventListener('click', () => switchPage('publish'));
+    document.getElementById('search-btn').addEventListener('click', searchGoods);
+    document.getElementById('search-input').addEventListener('keydown', e => e.key === 'Enter' && searchGoods());
+    document.getElementById('recharge-btn').addEventListener('click', () => {
         const num = parseFloat(prompt('请输入充值金额：'));
-        if(num && num>0) { balance += num; document.getElementById('balance').textContent = balance.toFixed(2); alert('充值成功！'); }
+        if (num && num > 0) { balance += num; document.getElementById('balance').textContent = balance.toFixed(2); alert('充值成功！'); }
     });
-    document.getElementById('withdraw-btn').addEventListener('click',()=>{
+    document.getElementById('withdraw-btn').addEventListener('click', () => {
         const num = parseFloat(prompt('请输入提现金额：'));
-        if(num && num>0 && num<=balance) { balance -= num; document.getElementById('balance').textContent = balance.toFixed(2); alert('提现申请提交！'); }
+        if (num && num > 0 && num <= balance) { balance -= num; document.getElementById('balance').textContent = balance.toFixed(2); alert('提现申请提交！'); }
         else alert('金额无效或余额不足！');
     });
 });
 </script>
+
 </body>
 </html>
