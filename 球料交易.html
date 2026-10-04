@@ -10,7 +10,7 @@
         body {background:var(--bg); min-height:100vh;}
         .header {background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.06); padding:0 20px; position:sticky; top:0; z-index:99;}
         .header-inner {max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; height:64px; flex-wrap:wrap; gap:10px;}
-        .logo {font-size:20px; font-weight:700; color:var(--primary); display:flex; align-items:center; gap:8px;}
+        .logo {font-size:20px; font-weight:700; color:var(--primary); display:flex; align-items:center; gap:8px; cursor:pointer;}
         .nav {display:flex; gap:8px; flex-wrap:wrap;}
         .nav a {text-decoration:none; color:#4b5563; padding:10px 18px; border-radius:8px; font-size:15px; transition:all .2s;}
         .nav a:hover, .nav a.active {background:var(--primary); color:#fff;}
@@ -23,7 +23,6 @@
         .register-desc {font-size:14px; opacity:.9; margin-bottom:12px;}
         .register-link {background:#fff; color:#2563eb; padding:10px 24px; border-radius:8px; text-decoration:none; font-weight:700; display:inline-block; transition:all .2s;}
         .register-link:hover {transform:scale(1.05);}
-        /* 登录弹窗 */
         .login-modal {position:fixed; inset:0; background:rgba(0,0,0,.7); display:flex; align-items:center; justify-content:center; z-index:9999;}
         .login-modal.hidden {display:none;}
         .login-box {background:#fff; border-radius:16px; padding:32px; max-width:420px; width:90%; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,.2);}
@@ -46,11 +45,16 @@
         .form-btn {padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
         .btn-primary {background:var(--primary); color:#fff;}
         .btn-success {background:var(--success); color:#fff;}
+        .btn {padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
+        .btn-sm {padding:6px 12px; font-size:13px;}
+        .btn-block {width:100%;}
+        .page {display:none;}
+        .page.active {display:block;}
         .goods-grid {display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:24px; opacity:0.2; pointer-events:none; transition:all .5s;}
         .goods-grid.unlocked {opacity:1; pointer-events:auto;}
-        .goods-card {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .3s; position:relative;}
+        .goods-card {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .3s; cursor:pointer; position:relative;}
         .goods-card:hover {transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,0,0,0.1);}
-        .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;}
+        .goods-img {width:100%; height:200px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center; overflow:hidden;}
         .goods-img img {width:100%; height:100%; object-fit:cover;}
         .goods-body {padding:18px;}
         .goods-name {font-size:17px; font-weight:600; margin-bottom:8px; line-height:1.4;}
@@ -59,12 +63,21 @@
         .goods-admin-bar {position:absolute; top:8px; right:8px; display:none; gap:6px;}
         .goods-admin-bar.show {display:flex;}
         .goods-admin-btn {padding:4px 8px; font-size:12px; border:none; border-radius:4px; cursor:pointer; background:rgba(0,0,0,.5); color:#fff;}
-        .btn {padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:600;}
-        .btn-sm {padding:6px 12px; font-size:13px;}
-        .btn-block {width:100%;}
         .empty {text-align:center; padding:60px 20px; color:#9ca3af;}
         .search-bar {display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;}
         .search-input {flex:1; min-width:250px; padding:14px 20px; border:1px solid #e5e7eb; border-radius:10px; font-size:15px;}
+        .detail-container {max-width:700px; margin:0 auto; padding:20px;}
+        .detail-back {display:inline-flex; align-items:center; gap:6px; color:var(--primary); cursor:pointer; margin-bottom:20px; font-size:15px;}
+        .detail-back:hover {text-decoration:underline;}
+        .detail-card {background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+        .detail-img {width:100%; height:400px; background:linear-gradient(135deg,#e0e7ff,#c7d2fe); display:flex; align-items:center; justify-content:center;}
+        .detail-img img {width:100%; height:100%; object-fit:contain;}
+        .detail-body {padding:24px;}
+        .detail-name {font-size:24px; font-weight:700; margin-bottom:12px;}
+        .detail-price {font-size:32px; font-weight:700; color:var(--danger); margin-bottom:16px;}
+        .detail-desc {font-size:15px; color:#4b5563; line-height:1.8; margin-bottom:24px;}
+        .detail-contact {background:#f0fdf4; border-radius:10px; padding:20px; text-align:center;}
+        .detail-contact-title {font-weight:600; margin-bottom:10px; color:var(--success);}
         .kefu-float {position:fixed; bottom:30px; right:30px; z-index:999;}
         .kefu-float-btn {width:60px; height:60px; background:var(--success); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; cursor:pointer; box-shadow:0 4px 15px rgba(7,193,96,.4); transition:all .3s;}
         .kefu-float-btn:hover {transform:scale(1.1);}
@@ -80,12 +93,12 @@
         @media (max-width:768px) {
             .header-inner {flex-direction:column; gap:12px; padding:12px 0; height:auto;}
             .goods-grid {grid-template-columns:repeat(2,1fr);}
+            .detail-img {height:280px;}
         }
     </style>
 </head>
 <body>
 
-<!-- 登录弹窗 -->
 <div class="login-modal" id="loginModal">
     <div class="login-box">
         <div class="login-title">🔐 账号登录</div>
@@ -100,7 +113,7 @@
 
 <header class="header">
     <div class="header-inner">
-        <div class="logo">📘 V8体育特供</div>
+        <div class="logo" onclick="goHome()">📘 V8体育特供</div>
         <nav class="nav">
             <a href="#" class="active" data-page="home">商品广场</a>
         </nav>
@@ -113,20 +126,17 @@
 </header>
 
 <main class="container">
-    <section id="home" class="page active">
-        <!-- 专属注册入口 -->
+    <section id="home-page" class="page active">
         <div class="register-bar">
             <div class="register-title">🎁 专属通道 - 新用户注册享福利</div>
             <div class="register-desc">仅限从本页面注册的用户享受专属福利</div>
             <a href="https://v8166.vip" target="_blank" class="register-link">👉 立即注册</a>
         </div>
 
-        <!-- 管理员入口 -->
         <div style="text-align:center; margin-bottom:16px;">
             <button class="btn btn-sm" style="background:#e5e7eb; color:#374151;" onclick="toggleAdminPanel()">🔐 管理员入口</button>
         </div>
 
-        <!-- 管理员面板 -->
         <div class="admin-panel" id="admin-panel">
             <div class="admin-title">
                 🔐 管理员上架商品
@@ -149,9 +159,28 @@
         </div>
         <div class="goods-grid" id="goods-grid"></div>
     </section>
+
+    <section id="detail-page" class="page">
+        <div class="detail-container">
+            <div class="detail-back" onclick="goHome()">← 返回商品广场</div>
+            <div class="detail-card">
+                <div class="detail-img" id="detail-img">📷</div>
+                <div class="detail-body">
+                    <h1 class="detail-name" id="detail-name"></h1>
+                    <div class="detail-price" id="detail-price"></div>
+                    <div class="detail-desc" id="detail-desc"></div>
+                    <div class="detail-contact">
+                        <div class="detail-contact-title">📞 联系获取完整内容</div>
+                        <p>添加客服微信/QQ群 领取完整资料</p>
+                        <button class="kefu-float-link" style="margin-top:12px;" onclick="alert('请添加微信：\naa9767a')">💚 微信联系</button>
+                        <button class="kefu-float-link qq" onclick="alert('请加入QQ群：\n142749228')">🐧 QQ群联系</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
-<!-- 悬浮客服 -->
 <div class="kefu-float">
     <div class="kefu-float-btn" onclick="document.querySelector('.kefu-float-box').classList.toggle('show')">💬</div>
     <div class="kefu-float-box">
@@ -160,53 +189,76 @@
             <div class="kefu-float-avatar">👨‍💼</div>
             <div class="kefu-float-name">V8官方客服</div>
             <div class="kefu-float-desc">工作时间：09:00-24:00<br>竭诚为您服务</div>
-            <button class="kefu-float-link" onclick="alert('请添加微信：\nAA9767A')">💚 微信联系</button>
-            <button class="kefu-float-link qq" onclick="alert('请添加QQ：\n142749228')">🐧 QQ联系</button>
+            <button class="kefu-float-link" onclick="alert('请添加微信：\naa9767a')">💚 微信联系</button>
+            <button class="kefu-float-link qq" onclick="alert('请加入QQ群：\n142749228')">🐧 QQ群联系</button>
         </div>
     </div>
 </div>
 
 <script>
-// ========== 配置区 ==========
-const ADMIN_PASSWORD = '123456';        // 管理员密码
-const REGISTER_URL = 'https://v8166.vip'; // 注册链接
+const ADMIN_PASSWORD = '123456';
+const REGISTER_URL = 'https://v8166.vip';
 
-// ✅ 已注册的有效账号列表（添加在这里）
 const VALID_USERS = {
-    // '账号名': '密码',
     'asd888': 'zxc334586',
-    // 继续添加：'张三': '123456',
+    'asd8888': 'zxc334586',
 };
 
-// 商品库
 let goodsList = [
     {
         id: 1,
         name: '雷速拉坦伊布拉莫维奇',
         price: 199,
-        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服。专属内部资料，精准分析，长期稳定盈利。',
         img: 'https://i.postimg.cc/tJWSmNyD/yi-bu.jpg',
     },
     {
         id: 2,
         name: '雷速傻哥专业连红搬运',
         price: 150,
-        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服。专业团队精选方案，每日稳定输出，高命中率。',
         img: 'https://i.postimg.cc/xdXP433G/sha-ge.jpg',
     },
     {
         id: 3,
         name: '雷速弘扬奉献精神的阿火',
         price: 85,
-        desc: 'v8体育官方特别提供，如想全免享用请联系客服',
-        img: '', // 填阿火的链接
+        desc: 'v8体育官方特别提供，如想全免享用请联系客服。内部一手资讯，精准赛事分析，欢迎长期合作。',
+        img: '',
     }
 ];
 
 let isAdmin = false;
 let currentUser = null;
 
-// 检查是否已登录
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+function goHome() {
+    showPage('home-page');
+    document.querySelector('.kefu-float-box').classList.remove('show');
+}
+
+function showDetail(id) {
+    const goods = goodsList.find(g => g.id === id);
+    if (!goods) return;
+    
+    document.getElementById('detail-name').textContent = goods.name;
+    document.getElementById('detail-price').textContent = '¥' + goods.price.toFixed(2);
+    document.getElementById('detail-desc').textContent = goods.desc;
+    
+    const imgBox = document.getElementById('detail-img');
+    if (goods.img) {
+        imgBox.innerHTML = `<img src="${goods.img}" alt="${goods.name}" onerror="this.parentElement.innerHTML='📷'">`;
+    } else {
+        imgBox.innerHTML = '📷';
+    }
+    
+    showPage('detail-page');
+}
+
 function checkLoggedIn() {
     const saved = localStorage.getItem('v8_user');
     if (saved) {
@@ -220,7 +272,6 @@ function checkLoggedIn() {
     return false;
 }
 
-// 登录验证
 function checkLogin() {
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -234,7 +285,6 @@ function checkLogin() {
     }
 }
 
-// 显示已登录状态
 function showLoggedIn() {
     document.getElementById('loginModal').classList.add('hidden');
     document.getElementById('goods-grid').classList.add('unlocked');
@@ -244,7 +294,6 @@ function showLoggedIn() {
     renderGoods();
 }
 
-// 退出登录
 function logout() {
     localStorage.removeItem('v8_user');
     currentUser = null;
@@ -255,10 +304,11 @@ function logout() {
     document.getElementById('password').value = '';
     document.getElementById('loginError').classList.remove('show');
     document.getElementById('loginModal').classList.remove('hidden');
+    goHome();
 }
 
 function showKefu() {
-    alert('微信：AA9767A\nQQ群：142749228\n注册/登录 请联系客服');
+    alert('微信：aa9767a\nQQ群：142749228\n注册/登录 请联系客服');
 }
 
 function toggleAdminPanel() {
@@ -316,10 +366,10 @@ function renderGoods(list = goodsList) {
         return;
     }
     grid.innerHTML = list.map(item => `
-        <div class="goods-card">
+        <div class="goods-card" onclick="showDetail(${item.id})">
             ${isAdmin ? `
                 <div class="goods-admin-bar show">
-                    <button class="goods-admin-btn" onclick="adminDeleteGoods(${item.id})">删除</button>
+                    <button class="goods-admin-btn" onclick="event.stopPropagation(); adminDeleteGoods(${item.id})">删除</button>
                 </div>
             ` : ''}
             <div class="goods-img">
@@ -332,7 +382,7 @@ function renderGoods(list = goodsList) {
                 <div class="goods-name">${item.name}</div>
                 <div class="goods-desc">${item.desc}</div>
                 <div class="goods-price">¥${item.price.toFixed(2)}</div>
-                <button class="btn btn-success btn-sm btn-block" disabled>✅ 查看详情</button>
+                <button class="btn btn-success btn-sm btn-block">✅ 查看详情</button>
             </div>
         </div>
     `).join('');
