@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V8体育</title>
+    <title>zz1680</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,6 @@
             padding: 20px;
         }
 
-        /* 手机适配 */
         @media (max-width: 768px) {
             body { padding: 12px; }
             .top-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -25,10 +24,8 @@
             .action-btn { padding: 10px 8px; font-size: 14px; }
             .grid-container { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
             .payment-grid { grid-template-columns: repeat(3, 1fr) !important; }
-            .withdraw-tabs { overflow-x: auto; width: 100%; }
         }
 
-        /* 顶部账户栏 */
         .top-bar {
             background: #fff;
             padding: 20px 30px;
@@ -42,16 +39,8 @@
             gap: 15px;
         }
 
-        .balance-item {
-            font-size: 15px;
-            color: #333;
-        }
-
-        .balance-item span {
-            font-weight: bold;
-            color: #e64340;
-            margin-left: 5px;
-        }
+        .balance-item { font-size: 15px; color: #333; }
+        .balance-item span { font-weight: bold; color: #e64340; margin-left: 5px; }
 
         .view-switch { display: flex; gap: 8px; }
         .view-btn {
@@ -65,7 +54,7 @@
         .view-btn.h5 { background: #e5e7eb; color: #333; }
         .view-btn.h5.active { background: #2563eb; color: white; }
 
-        .action-buttons { display: flex; gap: 10px; }
+        .action-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
         .action-btn {
             padding: 10px 25px;
             border: none;
@@ -80,7 +69,6 @@
         .add { background: #8b5cf6; }
         .sub { background: #ec4899; }
 
-        /* 模块网格 - 可点击 */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -103,7 +91,6 @@
         .card-title { font-size: 16px; color: #333; margin-bottom: 8px; }
         .card-value { font-size: 14px; color: #888; }
 
-        /* 背景色区分 */
         .bg-1 { background: #fff7ed; }
         .bg-2 { background: #eff4ff; }
         .bg-3 { background: #f0fdf4; }
@@ -113,7 +100,6 @@
         .bg-7 { background: #eef7ff; }
         .bg-8 { background: #fffbeb; }
 
-        /* 页面切换 */
         .page { display: none; }
         .page.active { display: block; }
         .back-btn {
@@ -127,41 +113,39 @@
         }
         .page-title { font-size: 20px; margin-bottom: 25px; color: #333; }
 
-        /* 下注页面 */
         .bet-box {
             background: #fff;
             border-radius: 12px;
             padding: 40px 30px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            text-align: center;
             max-width: 600px;
         }
-        .bet-icon { font-size: 60px; margin-bottom: 20px; }
-        .bet-name { font-size: 22px; font-weight: bold; color: #333; margin-bottom: 10px; }
-        .bet-tip { font-size: 15px; color: #666; margin-bottom: 25px; }
-        .bet-link-box {
+        .bet-icon { font-size: 60px; margin-bottom: 20px; text-align: center; }
+        .bet-name { font-size: 22px; font-weight: bold; color: #333; margin-bottom: 10px; text-align: center; }
+        .bet-desc { font-size: 14px; color: #666; margin-bottom: 25px; text-align: center; }
+        .api-zone {
             background: #f9fafb;
-            padding: 15px;
-            border-radius: 6px;
+            padding: 20px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            word-break: break-all;
-            color: #4b5563;
-            font-size: 14px;
+            border-left: 3px solid #2563eb;
         }
-        .bet-btn {
-            display: inline-block;
-            padding: 12px 40px;
+        .api-label { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+        .api-note { font-size: 12px; color: #9ca3af; margin-top: 10px; }
+        .go-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
             background: #2563eb;
             color: white;
-            text-decoration: none;
+            border: none;
             border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
-            border: none;
         }
-        .bet-btn:hover { background: #1d4ed8; }
+        .go-btn:hover { background: #1d4ed8; }
+        .go-btn:disabled { background: #9ca3af; cursor: not-allowed; }
 
-        /* 表单样式 */
         .form-box {
             background: #fff;
             border-radius: 12px;
@@ -170,12 +154,7 @@
             margin-bottom: 25px;
             max-width: 500px;
         }
-        .form-label {
-            display: block;
-            font-size: 15px;
-            color: #333;
-            margin-bottom: 8px;
-        }
+        .form-label { display: block; font-size: 15px; color: #333; margin-bottom: 8px; }
         .form-input {
             width: 100%;
             padding: 12px 15px;
@@ -222,7 +201,6 @@
             margin-bottom: 8px;
         }
 
-        /* 二维码显示区域 */
         .qrcode-box {
             display: none;
             background: #fff;
@@ -300,50 +278,58 @@
             <div class="grid-card bg-2" data-type="sport">
                 <div class="card-icon">⚽</div>
                 <div class="card-title">体育</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
             <div class="grid-card bg-3" data-type="live">
                 <div class="card-icon">🎲</div>
                 <div class="card-title">真人</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
             <div class="grid-card bg-4" data-type="chess">
                 <div class="card-icon">🀄</div>
                 <div class="card-title">棋牌</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
             <div class="grid-card bg-5" data-type="esport">
                 <div class="card-icon">⚔️</div>
                 <div class="card-title">电竞</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
             <div class="grid-card bg-6" data-type="lottery">
                 <div class="card-icon">🎫</div>
                 <div class="card-title">彩票</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
             <div class="grid-card bg-7" data-type="game">
                 <div class="card-icon">🐟</div>
                 <div class="card-title">电游</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
             <div class="grid-card bg-8" data-type="slot">
                 <div class="card-icon">🦁</div>
                 <div class="card-title">老虎机</div>
-                <div class="card-value">点击进入</div>
+                <div class="card-value">进入平台</div>
             </div>
         </div>
     </div>
 
-    <!-- 下注通用页面 -->
+    <!-- 接口对接页面 -->
     <div id="bet-page" class="page">
         <button class="back-btn" id="back-from-bet">← 返回</button>
         <div class="bet-box">
             <div class="bet-icon" id="bet-icon">⚽</div>
-            <div class="bet-name" id="bet-name">体育</div>
-            <div class="bet-tip">点击下方按钮进入下注平台</div>
-            <div class="bet-link-box" id="bet-link">待设置链接</div>
-            <a class="bet-btn" id="bet-enter" href="#" target="_blank">立即进入</a>
+            <div class="bet-name" id="bet-name">体育平台</div>
+            <div class="bet-desc" id="bet-desc">通过接口对接其他系统，生成入口</div>
+
+            <div class="api-zone">
+                <div class="api-label">🔌 接口对接预留区</div>
+                <div id="api-status" style="color:#e64340; font-size:13px;">状态：待接入接口代码</div>
+                <div class="api-note">
+                    这里对接：登录验证 → 获取令牌 → 生成跳转/会话 → 进入对应系统
+                </div>
+            </div>
+
+            <button class="go-btn" id="enter-platform-btn">进入平台</button>
         </div>
     </div>
 
@@ -351,77 +337,45 @@
     <div id="deposit-page" class="page">
         <button class="back-btn" id="back-from-deposit">← 返回</button>
         <h2 class="page-title">存款</h2>
-        
         <div class="form-box">
             <label class="form-label">存款金额</label>
             <input type="number" id="deposit-amount" class="form-input" placeholder="请输入存款金额" min="0" step="1">
         </div>
-
         <h3 style="margin-bottom: 15px; font-size: 16px; color: #333;">选择支付方式</h3>
         <div class="payment-grid">
-            <div class="payment-item" data-name="快捷虚拟币" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">加送0.3%</span>
-                <div>快捷虚拟币</div>
+            <div class="payment-item" data-name="快捷虚拟币" data-qrcode="">
+                <span class="payment-tag">加送0.3%</span><div>快捷虚拟币</div>
             </div>
-            <div class="payment-item" data-name="EB直充" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">推荐</span>
-                <div>EB直充</div>
+            <div class="payment-item" data-name="EB直充" data-qrcode="">
+                <span class="payment-tag">推荐</span><div>EB直充</div>
             </div>
-            <div class="payment-item" data-name="EBpay虚拟币" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">加送0.3%</span>
-                <div>EBpay虚拟币</div>
+            <div class="payment-item" data-name="EBpay虚拟币" data-qrcode="">
+                <span class="payment-tag">加送0.3%</span><div>EBpay虚拟币</div>
             </div>
-            <div class="payment-item" data-name="EBpay" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">推荐</span>
-                <div>EBpay</div>
+            <div class="payment-item" data-name="EBpay" data-qrcode="">
+                <span class="payment-tag">推荐</span><div>EBpay</div>
             </div>
-            <div class="payment-item" data-name="支付宝" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">推荐</span>
-                <div>支付宝</div>
+            <div class="payment-item" data-name="支付宝" data-qrcode="">
+                <span class="payment-tag">推荐</span><div>支付宝</div>
             </div>
-            <div class="payment-item" data-name="支付宝零钱" data-qrcode="/* 替换链接 */">
-                <div>支付宝零钱</div>
+            <div class="payment-item" data-name="支付宝零钱" data-qrcode=""><div>支付宝零钱</div></div>
+            <div class="payment-item" data-name="云闪付零钱" data-qrcode=""><div>云闪付零钱</div></div>
+            <div class="payment-item" data-name="微信零钱" data-qrcode="">
+                <span class="payment-tag">推荐</span><div>微信零钱</div>
             </div>
-            <div class="payment-item" data-name="云闪付零钱" data-qrcode="/* 替换链接 */">
-                <div>云闪付零钱</div>
+            <div class="payment-item" data-name="支付宝速存" data-qrcode="">
+                <span class="payment-tag">推荐</span><div>支付宝速存</div>
             </div>
-            <div class="payment-item" data-name="微信零钱" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">推荐</span>
-                <div>微信零钱</div>
-            </div>
-            <div class="payment-item" data-name="支付宝速存" data-qrcode="/* 替换链接 */">
-                <span class="payment-tag">推荐</span>
-                <div>支付宝速存</div>
-            </div>
-            <div class="payment-item" data-name="云闪付转卡" data-qrcode="/* 替换链接 */">
-                <div>云闪付转卡</div>
-            </div>
-            <div class="payment-item" data-name="微信转卡" data-qrcode="/* 替换链接 */">
-                <div>微信转卡</div>
-            </div>
-            <div class="payment-item" data-name="京东转卡" data-qrcode="/* 替换链接 */">
-                <div>京东转卡</div>
-            </div>
-            <div class="payment-item" data-name="数字人民币" data-qrcode="/* 替换链接 */">
-                <div>数字人民币</div>
-            </div>
-            <div class="payment-item" data-name="支付宝H5" data-qrcode="/* 替换链接 */">
-                <div>支付宝H5</div>
-            </div>
-            <div class="payment-item" data-name="网银转账" data-qrcode="/* 替换链接 */">
-                <div>网银转账</div>
-            </div>
-            <div class="payment-item" data-name="U卡支付" data-qrcode="/* 替换链接 */">
-                <div>U卡支付</div>
-            </div>
-            <div class="payment-item" data-name="icash.one" data-qrcode="/* 替换链接 */">
-                <div>icash.one</div>
-            </div>
-            <div class="payment-item" data-name="HK转数快" data-qrcode="/* 替换链接 */">
-                <div>HK转数快</div>
-            </div>
+            <div class="payment-item" data-name="云闪付转卡" data-qrcode=""><div>云闪付转卡</div></div>
+            <div class="payment-item" data-name="微信转卡" data-qrcode=""><div>微信转卡</div></div>
+            <div class="payment-item" data-name="京东转卡" data-qrcode=""><div>京东转卡</div></div>
+            <div class="payment-item" data-name="数字人民币" data-qrcode=""><div>数字人民币</div></div>
+            <div class="payment-item" data-name="支付宝H5" data-qrcode=""><div>支付宝H5</div></div>
+            <div class="payment-item" data-name="网银转账" data-qrcode=""><div>网银转账</div></div>
+            <div class="payment-item" data-name="U卡支付" data-qrcode=""><div>U卡支付</div></div>
+            <div class="payment-item" data-name="icash.one" data-qrcode=""><div>icash.one</div></div>
+            <div class="payment-item" data-name="HK转数快" data-qrcode=""><div>HK转数快</div></div>
         </div>
-
         <div class="qrcode-box" id="qrcode-box">
             <div class="qrcode-img" id="qrcode-img">请先选择支付方式</div>
             <div class="qrcode-name" id="qrcode-name"></div>
@@ -434,13 +388,11 @@
     <div id="withdraw-page" class="page">
         <button class="back-btn" id="back-from-withdraw">← 返回</button>
         <h2 class="page-title">取款</h2>
-        
         <div class="form-box">
             <label class="form-label">取款金额</label>
             <input type="number" id="withdraw-amount" class="form-input" placeholder="请输入取款金额" min="0" step="1">
             <button class="form-btn confirm" id="confirm-withdraw">确认取款</button>
         </div>
-
         <div class="withdraw-tabs">
             <button class="withdraw-tab">微信取款</button>
             <button class="withdraw-tab active">EBpay提币(即时到账)</button>
@@ -459,19 +411,20 @@
         let cashBalance = 100000.00;
         let walletBalance = 0.00;
         let selectedPayment = null;
+        let currentPlatformType = null;
 
-        // 各板块链接配置 —— 在这里填入对应链接即可生效
-        const BET_CONFIG = {
-            sport:  { name: '体育',  icon: '⚽', url: '/* 替换为体育链接 */' },
-            live:   { name: '真人',  icon: '🎲', url: '/* 替换为真人链接 */' },
-            chess:  { name: '棋牌',  icon: '🀄', url: '/* 替换为棋牌链接 */' },
-            esport: { name: '电竞',  icon: '⚔️', url: '/* 替换为电竞链接 */' },
-            lottery:{ name: '彩票',  icon: '🎫', url: '/* 替换为彩票链接 */' },
-            game:   { name: '电游',  icon: '🐟', url: '/* 替换为电游链接 */' },
-            slot:   { name: '老虎机', icon: '🦁', url: '/* 替换为老虎机链接 */' }
+        // 平台配置 —— 对接接口用
+        const PLATFORM_CONFIG = {
+            sport:  { name: '体育平台',  icon: '⚽', desc: '对接体育系统接口，验证账号→生成会话→进入' },
+            live:   { name: '真人平台',  icon: '🎲', desc: '对接真人系统接口，验证账号→生成会话→进入' },
+            chess:  { name: '棋牌平台',  icon: '🀄', desc: '对接棋牌系统接口，验证账号→生成会话→进入' },
+            esport: { name: '电竞平台',  icon: '⚔️', desc: '对接电竞系统接口，验证账号→生成会话→进入' },
+            lottery:{ name: '彩票平台',  icon: '🎫', desc: '对接彩票系统接口，验证账号→生成会话→进入' },
+            game:   { name: '电游平台',  icon: '🐟', desc: '对接电游系统接口，验证账号→生成会话→进入' },
+            slot:   { name: '老虎机平台', icon: '🦁', desc: '对接老虎机系统接口，验证账号→生成会话→进入' }
         };
 
-        // 更新显示
+        // 更新余额显示
         function updateDisplay() {
             const total = cashBalance + walletBalance;
             document.getElementById('total-balance').textContent = total.toFixed(2);
@@ -491,26 +444,56 @@
             }
         }
 
-        // 打开下注页面
-        function showBetPage(type) {
-            const cfg = BET_CONFIG[type];
+        // 打开平台接口页面
+        function showPlatformPage(type) {
+            const cfg = PLATFORM_CONFIG[type];
             if (!cfg) return;
+            currentPlatformType = type;
             
             document.getElementById('bet-icon').textContent = cfg.icon;
             document.getElementById('bet-name').textContent = cfg.name;
-            document.getElementById('bet-link').textContent = cfg.url;
-            
-            const enterBtn = document.getElementById('bet-enter');
-            if (cfg.url && !cfg.url.includes('替换')) {
-                enterBtn.href = cfg.url;
-                enterBtn.style.pointerEvents = 'auto';
-            } else {
-                enterBtn.href = '#';
-                enterBtn.style.pointerEvents = 'none';
-            }
+            document.getElementById('bet-desc').textContent = cfg.desc;
+            document.getElementById('api-status').textContent = '状态：待接入接口代码';
+            document.getElementById('api-status').style.color = '#e64340';
             
             showPage('bet-page');
         }
+
+        // ============ 【这里写接口对接逻辑】============
+        async function enterPlatform() {
+            const type = currentPlatformType;
+            if (!type) return;
+
+            // 示例：这里替换成你们的真实接口逻辑
+            // 1. 拿当前用户信息 / 令牌
+            // 2. 请求对方系统接口：登录/验证/获取ticket
+            // 3. 拿到入口地址或会话
+            // 4. 跳转或打开对应页面
+
+            alert('接口对接预留位\n当前平台：' + PLATFORM_CONFIG[type].name + '\n\n请在这里填入对接另外系统的接口调用代码');
+            
+            /* 示例模板：
+            document.getElementById('api-status').textContent = '正在验证...';
+            const res = await fetch('https://xxx.com/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    platform: type,
+                    userId: '当前用户ID',
+                    token: '验证令牌',
+                    balance: walletBalance
+                })
+            });
+            const data = await res.json();
+            if (data.ok) {
+                document.getElementById('api-status').textContent = '对接成功，正在进入...';
+                window.open(data.entryUrl, '_blank');
+            } else {
+                document.getElementById('api-status').textContent = '对接失败：' + data.msg;
+            }
+            */
+        }
+        // =================================================
 
         document.addEventListener('DOMContentLoaded', function() {
             updateDisplay();
@@ -538,13 +521,16 @@
             });
             document.getElementById('btn-refresh').addEventListener('click', () => location.reload());
 
-            // 点击板块卡片跳转下注页面
+            // 点击平台卡片
             document.querySelectorAll('.grid-card').forEach(card => {
                 const type = card.getAttribute('data-type');
                 if (type && type !== 'wallet') {
-                    card.addEventListener('click', () => showBetPage(type));
+                    card.addEventListener('click', () => showPlatformPage(type));
                 }
             });
+
+            // 进入平台按钮
+            document.getElementById('enter-platform-btn').addEventListener('click', enterPlatform);
 
             // H5/PC 切换
             const btnPc = document.getElementById('btn-pc');
@@ -558,16 +544,15 @@
                 document.body.style.maxWidth = '480px'; document.body.style.margin = '0 auto';
             });
 
-            // 返回按钮
+            // 返回
             document.getElementById('back-from-deposit').addEventListener('click', () => showPage('main-page'));
             document.getElementById('back-from-withdraw').addEventListener('click', () => showPage('main-page'));
             document.getElementById('back-from-bet').addEventListener('click', () => showPage('main-page'));
 
-            // 选择支付方式
+            // 存款支付方式
             const qrcodeBox = document.getElementById('qrcode-box');
             const qrcodeName = document.getElementById('qrcode-name');
             const qrcodeImg = document.getElementById('qrcode-img');
-
             document.querySelectorAll('.payment-item').forEach(item => {
                 item.addEventListener('click', function() {
                     document.querySelectorAll('.payment-item').forEach(el => el.classList.remove('active'));
@@ -577,10 +562,10 @@
                         qr: this.getAttribute('data-qrcode')
                     };
                     qrcodeName.textContent = selectedPayment.name;
-                    if (selectedPayment.qr && selectedPayment.qr !== '/* 替换链接 */') {
+                    if (selectedPayment.qr && selectedPayment.qr.trim() !== '') {
                         qrcodeImg.innerHTML = `<img src="${selectedPayment.qr}" alt="${selectedPayment.name}">`;
                     } else {
-                        qrcodeImg.innerHTML = '待设置';
+                        qrcodeImg.innerHTML = '二维码待设置';
                     }
                     qrcodeBox.classList.add('show');
                 });
@@ -589,14 +574,8 @@
             // 确认存款
             document.getElementById('confirm-deposit').addEventListener('click', function() {
                 const amount = parseFloat(document.getElementById('deposit-amount').value);
-                if (!amount || amount <= 0) {
-                    alert('请输入有效的存款金额！');
-                    return;
-                }
-                if (!selectedPayment) {
-                    alert('请先选择支付方式！');
-                    return;
-                }
+                if (!amount || amount <= 0) { alert('请输入有效的存款金额！'); return; }
+                if (!selectedPayment) { alert('请先选择支付方式！'); return; }
                 walletBalance += amount;
                 updateDisplay();
                 alert(`存款成功！\n金额：${amount.toFixed(2)}\n方式：${selectedPayment.name}\n当前钱包额度：${walletBalance.toFixed(2)}`);
@@ -607,14 +586,8 @@
             // 确认取款
             document.getElementById('confirm-withdraw').addEventListener('click', function() {
                 const amount = parseFloat(document.getElementById('withdraw-amount').value);
-                if (!amount || amount <= 0) {
-                    alert('请输入有效的取款金额！');
-                    return;
-                }
-                if (amount > walletBalance) {
-                    alert(`余额不足！\n当前钱包额度：${walletBalance.toFixed(2)}`);
-                    return;
-                }
+                if (!amount || amount <= 0) { alert('请输入有效的取款金额！'); return; }
+                if (amount > walletBalance) { alert(`余额不足！\n当前钱包额度：${walletBalance.toFixed(2)}`); return; }
                 walletBalance -= amount;
                 updateDisplay();
                 alert(`取款成功！\n金额：${amount.toFixed(2)}\n当前钱包额度：${walletBalance.toFixed(2)}`);
