@@ -1,10 +1,9 @@
-[index.html](https://github.com/user-attachments/files/33024878/index.html)
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V8体育</title>
+    <title>全能体育</title>
     <style>
         * {
             margin: 0;
